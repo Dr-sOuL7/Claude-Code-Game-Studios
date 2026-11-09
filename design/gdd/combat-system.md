@@ -1,9 +1,9 @@
 # Combat System
 
-> **Status**: In Design — DRAFT v0.1 (audited spec). **Not approved.** No combat code may be written from this until the owner signs off on Section 11 (open decisions).
-> **Author**: owner (original spec) + Claude (audit, gap-filling, reference model)
+> **Status**: In Design — DRAFT v0.2 (audited spec + proposed rule changes R1–R7, Section 12). **Not approved.** No combat code may be written from this until the owner signs off on Sections 11 and 12. **Action-level balance is close to the proposed targets in simulation; build/component-level balance is NOT achieved (Section 12.3).**
+> **Author**: owner (original spec) + Claude (audit, gap-filling, reference model, lever search)
 > **Last Updated**: 2026-11-09
-> **Last Verified**: 2026-11-09 (numbers below reproduced by `prototypes/combat-reference-model/`)
+> **Last Verified**: 2026-11-09 (numbers reproduced by `prototypes/combat-reference-model/` — `results.txt` for v0.1, `results_v02.txt` and `results_v02_final.txt` for v0.2)
 > **Implements Pillar**: Skill over randomness; stat conservation + nonlinear interaction = balance (pillars doc not yet written)
 
 ## Summary
@@ -82,7 +82,7 @@ synergy: Attack type ×1.15; Balance ×1.05
 spec_AP = 1 + 0.006 × max(0, AP − 50)
 identity = 1.08 if domain == Attack
 momentum = 1 + 0.05 × min(3, combo_count − 1) if combo_count ≥ 2 and action ∈ {ATTACK, SPECIAL}  [D9]
-initiative = 1.08 if action ∈ {ATTACK, SPECIAL} and opp action ∈ {DODGE, CHARGE}
+initiative = 1.0 in v0.2 (R4: the spec's 1.08 impact bonus vs DODGE/CHARGE is removed; the +5% burst chance in F5 stays)
 adaptation = 1.05 if repeat_count ≥ 2 and action ≠ last_action  [D10]
 ```
 Base AP×(1+MB/120): 22.5..102.5. Example: B01D01T01 ATTACK: 40 × (1 + 50/120) = 56.67; × 1.5 = 85.0; × 1.05 (Balance) = 89.25.
@@ -92,6 +92,7 @@ Base AP×(1+MB/120): 22.5..102.5. Example: B01D01T01 ATTACK: 40 × (1 + 50/120) 
 Impact_in = Impact_out(opp) × defend_mult × charge_mult × type_mult × spec_ST
 defend_mult (action DEFEND) = 1 − max(0.05, 0.40 − 0.10 × guard_stack)   [D7]
         × 0.80 if Defense type, × 0.92 if domain == Defense
+dodge_mult (action DODGE, collision still happened) = 0.65          (R3; spec has no DODGE mitigation)
 charge_mult (action CHARGE) = 1.25
 type_mult = 0.95 if Balance
 spec_ST = 1 − 0.005 × max(0, ST − 70)
@@ -103,10 +104,11 @@ Example (Balance vs Balance, neutral builds, target not defending): 89.25 × 0.9
 ST_eff = ST × max(0.25, 1 − 0.005 × (t − 1))          arena destabilization
 stability_level −= Impact_in / ST_eff                  floor 0   [D1]
 recoil (hitter, own stability) = Impact_out / ST_eff_self × (0.85 if Defense type) × (1 + 0.05×min(3,combo_count−1) if momentum)  [D3]
-position_pressure += Impact_in / MS × pressure_scale + passive_pressure; passive_pressure = 0   [D5]
+position_pressure += Impact_in / (MS + pressure_st_share × ST) × pressure_scale + passive_pressure; passive_pressure = 0   [D5]
 energy −= Impact_in / energy_div                       (target)  [D4]
 ```
-Example: 84.8 / ST_eff 50 → stability −1.70; pressure +1.70; energy −4.24 (energy_div 20).
+Spec values: `pressure_st_share` 0 (divisor MS), `pressure_scale` 1, `energy_div` 20. **v0.2 proposes 1.0 / 3 / 120 (R6, R7). With share 1.0 the divisor is MS + ST = 100 for every disc, i.e. the disc no longer affects how easily a Beyblade is pushed. This replaces the spec's `Impact / MS` and is decision O9.**
+Example (spec values): 84.8 / ST_eff 50 → stability −1.70; pressure +84.8/50 = 1.70; energy −84.8/20 = 4.24.
 
 **F5 — Burst probability** *(the spec's `Impact × MS/LI` ranges 15–615 per Attack hit and is not a probability)* **[D2]**
 ```
@@ -120,7 +122,9 @@ P_burst = min(burst_cap, 1 − exp(−k × x)),   k = −ln(1 − burst_ref_p) /
 
 **F6 — Energy drain and charge**
 ```
-drain/turn = (1 + MB/80) × (0.80 Stamina | 0.95 Balance) × (0.92 if domain==Stamina) × (1 − 0.004 × max(0, SM − 70))
+energy_start = energy_base + 1.2 × SM                       (spec: energy_base 0; v0.2: 20, R7)
+drain/turn = (1 + MB/80) × (stamina_drain Stamina | 0.95 Balance) × (0.92 if domain==Stamina) × (1 − 0.004 × max(0, SM − 70)) × drain_scale
+                                                             (spec: stamina_drain 0.80, drain_scale 1; v0.2: 0.90, 0.80, R7)
 if position_pressure > 70: energy −= position_pressure / 50
 CHARGE: special_meter += 15 × (1.25 Stamina | 1.05 Balance), cap 100.   SPECIAL: special_meter = 0
 ```
@@ -136,6 +140,14 @@ P_ringout = min(0.90, 0.25 + (position_pressure − 120)/100) × (1 − 0.005 ×
 
 **F10 — Identity bonus** (spec: "dominant stat ≥ 1.25× others → +8% domain efficiency"): the highest F0 score ≥ 1.25 × the mean of the other two sets `domain` to that axis; +8% applied as in F2 (Attack), F3 (Defense), F6 (Stamina). **[D11]**
 
+**F11 — DEFEND counter (R1)**: when the target's action is DEFEND and a collision occurred, `prevented = Impact_before_defend − Impact_in` (the DEFEND, Defense-type and Defense-identity multipliers only), `returned = defend_counter × prevented`; the hitter takes `returned / ST_eff_hitter` stability loss and `returned / (MS_hitter + pressure_st_share × ST_hitter) × pressure_scale` position pressure. `defend_counter` = 4. Worked example: 100 impact, fresh guard (40% reduction) → prevented 40 → returned 160 → hitter stability −3.2 (ST_eff 50) and pressure +4.8.
+
+**F12 — Whiff cost (R2)**: a player whose action is ATTACK or SPECIAL and no collision occurred loses `whiff_cost` = 3 energy.
+
+**F13 — Special economy (R5)**: SPECIAL is legal at `special_meter ≥ special_cost` = 50 (spec: 100). Each time a player is hit (collision, Impact_in > 0) their meter gains `hit_meter_gain` = 10 (cap 100). CHARGE gain is unchanged (15, ×1.25 Stamina).
+
+**F14 — Dodge (R3)**: unchanged collision effect (−0.25 × dodge_eff, decay 0.10); added `dodge_mult` 0.65 in F3.
+
 ## Edge Cases
 
 | # | Case | Resolution |
@@ -149,7 +161,7 @@ P_ringout = min(0.90, 0.25 + (position_pressure − 120)/100) × (1 − 0.005 ×
 | E7 | SPECIAL committed with meter < 100 | Rejected with an error; server asks again, never substitutes |
 | E8 | No collision this turn | Impact, stability, burst, energy-from-impact are all skipped; passive drain and passive pressure still apply |
 | E9 | Turn timer expires (online) | **OPEN — O5.** Must not be exploitable for stalling |
-| E10 | Termination | Slowest passive drain over all 512 profiles is 0.8216/turn (B01D01T05: Stamina type, Stamina identity, SM 85) on 102 energy, so no match can last past 125 turns. Observed max in 12,250 simulated matches: 56. No timeout path exists |
+| E10 | Termination | v0.1 (spec values): slowest passive drain 0.8216/turn (B01D01T05) on 102 energy → no match past 125 turns; observed max 56 in 12,250 matches. **v0.2 values: 0.7394/turn on 122 energy → bound 165 turns** (computed over all 512 profiles); observed max 76 in 20,000 matches. No timeout path exists |
 
 | E11 | Energy exactly 0 | Counts as ≤ 0 (loss) |
 | E12 | Same seed, same actions | Identical result and event list (determinism is a test) |
@@ -165,19 +177,25 @@ P_ringout = min(0.90, 0.25 + (position_pressure − 120)/100) × (1 − 0.005 ×
 
 All live in an external data file (no hardcoded gameplay values). Ranges below are what the reference model explored — **evidence-informed starting ranges, not approved values**.
 
-| Knob | Spec / default | Explored range | Affects |
-|------|---------------|----------------|---------|
-| `burst_ref_p` | (none in spec) 0.05 | 0.002–0.05 | Burst frequency (4% of matches at 0.002, 56% at 0.05; energy_div 20) |
-| `burst_cap` | 0.75 | — | Max single-hit burst chance |
-| `energy_div` | 20 | 20–320 | Match length, Spin Finish frequency |
-| `pressure_scale` | 1.0 | 1–6 | Ring-out frequency (0% → 18–25%), Defense viability |
-| `stab_max` | 100 | — | How much stability matters to burst |
-| `ringout_threshold` / `base` / `cap` | 120 / 0.25 / 0.90 | — | Ring-out odds |
-| `collision` base and modifiers | 0.4, +0.15, −0.25 | — | Dodge/Attack value |
-| `special_cost` / `charge_gain` | 100 / 15 | — | Special viability |
-| `dodge_decay`, `defend_fresh`, `defend_step`, `defend_floor` | 0.10, 0.40, 0.10, 0.05 | — | Dodge/Defend value |
-| `identity_bonus`, `type synergy %`, `spec rates` | spec values | — | Build identity strength |
-| `type_margin` | 0.15 | 0.10–0.25 | Type distribution |
+| Knob | Spec value | v0.2 proposed | Tested range | Affects |
+|------|-----------|---------------|--------------|---------|
+| `burst_ref_p` | none (formula invalid) | 0.003 | 0.001–0.05 | Burst share of finishes (≈4% at 0.002, 56% at 0.05 with spec energy scale) |
+| `burst_cap` | none | 0.75 | never reached (max observed 0.21) | Safety ceiling |
+| `energy_div` | 20 | 120 | 20–480 | Match length; at 20 Spin is ~90% of finishes and ring-out vanishes |
+| `energy_base` | 0 | 20 | 0–60 | Floor on lifetime of low-SM builds (T03) |
+| `drain_scale` | 1.0 | 0.8 | 0.6–1.0 | Match length |
+| `stamina_drain` | 0.8 | 0.9 | 0.8–0.9 | Stamina-type advantage |
+| `pressure_scale` | 1 | 3 | 1–8 | Ring-out frequency (0% → 14–15% at 3; 18–25% at 6+ with disc-weighted divisor) |
+| `pressure_st_share` | 0 | 1.0 | 0–1 | 1.0 makes pressure intake disc-neutral (Defense viability); see O9 |
+| `defend_counter` | none | 4 | 0–4 (**top of tested range**) | DEFEND counterplay, Attack-spam |
+| `whiff_cost` | none | 3 | 0–4 | Cost of attacking into a miss |
+| `hit_meter_gain` | none | 10 | 0–15 | Special availability / comeback |
+| `special_cost` | 100 | 50 | 50–100 | Special viability |
+| `dodge_incoming` | none | 0.65 | 0.5–1.0 | Dodge viability |
+| `dodge_collision`, `dodge_decay` | 0.25, 0.10 | unchanged | 0.25–0.55, 0–0.10 | Dodge collision effect |
+| `init_mult` | 1.08 | 1.0 | 1.0–1.08 | Attack vs Dodge/Charge |
+| `stab_max`, `ringout_*`, spec thresholds and rates | spec | unchanged | — | — |
+| `type_margin` | 0.15 | 0.15 | 0.10–0.25 (not swept) | Type distribution |
 
 ## Acceptance Criteria
 
@@ -190,7 +208,7 @@ Logic tests (gdUnit4, `tests/unit/combat/`), all BLOCKING:
 5. Swapping seats of identical builds with mirrored RNG streams yields identical outcomes (no seat bias).
 6. F0 classifies the four spec examples as Attack, Defense, Stamina, Balance and yields the 169/167/128/48 distribution (or the approved replacement).
 7. Illegal SPECIAL is rejected; a hidden action is never present in any broadcast before resolution (integration test).
-8. Every simulated match terminates within the proven bound (≤ 125 turns).
+8. Every simulated match terminates within the proven bound (≤ 125 turns at spec values; ≤ 165 turns at the v0.2 values — the test reads the bound from the same data file as the engine).
 9. Every worked example in Section 4 reproduces to ±0.01.
 
 Balance gate (Phase 6; **no "balanced" claim before it passes**), thresholds to be set by the owner (O4): per-profile win rate band, no strictly dominant action, finish-mix and match-length bands, stalling metric below threshold, no dominant component.
@@ -231,6 +249,8 @@ The original spec did not define these. Each is a choice, not a fact; the refere
 
 ## 11. Open Decisions for the Owner
 
+**Status after the v0.2 search:** O1–O4 have a *proposed* answer in Section 12 (needs your approval); O5–O7 remain open; O8–O10 are new.
+
 | ID | Question | Why it matters | Candidate levers (each must be simulated before adoption) |
 |----|----------|----------------|-----------------------------------------------------------|
 | O1 | Attack-spam dominates (F-5). How should Attack be countered? | Violates "meaningful decisions / no dominant strategy" | Defend returns a share of damage; Attack costs energy; Dodge → counter window; Initiative also rewards Defend |
@@ -240,3 +260,55 @@ The original spec did not define these. Each is a choice, not a fact; the refere
 | O5 | Turn timer and timeout default action | Stalling and fairness online | e.g. 30 s; timeout = DEFEND with fatigue already applied |
 | O6 | Passive pressure recipient (D5) | Anti-stall strength | Both players; only the staller (draft) |
 | O7 | Defense type is rare (48/512) and ring-out-prone | "Supports all playstyles" | Re-weight F0; give ST a ring-out role; adjust MS/pressure |
+| O8 | Component-level imbalance (Section 12.3): B05/B04 weak, B03/B06 strong, T03 a trap tip | Violates "no dominant meta / no superior parts" in practice even though stat totals are equal | Give LI a second role every match (e.g. stability retention or recoil), reduce AP's linear impact, or add an energy/stability cost scaling with AP; must be simulated against all 512 profiles |
+| O9 | v0.2 replaces `position_pressure += Impact/MS` with a constant divisor (MS+ST=100) | Changes a spec formula; MS loses its push-resistance role | Keep the spec formula and accept that Defense-type builds are ring-out victims, or give ST/LI a ring-out role instead |
+| O10 | v0.2 changes spec energy numbers: `/20`→`/120`, reserve 0→20, drain ×0.8, Stamina 0.8→0.9 | These are the spec's own numbers; at the spec's energy scale the median match is 6–11 turns, and with burst tuned down Spin Finish is ~90% of finishes with no ring-outs | Accept, or redesign the energy model (e.g. fixed match-length clock) |
+
+## 12. Proposed v0.2 Rule Changes and Evidence
+
+Source: `prototypes/combat-reference-model/` (`lever_search*.py`, `validate_*.py`; outputs in `results_v02.txt`, `results_v02_final.txt`). Python reference model, fixed seeds, 7 policies (4 pure, ROT, ADP, RND) round-robin on random build pairs. **Policies are not optimal play, and the build pairs are samples, not all 131,328.** Nothing here claims the game is balanced.
+
+### 12.1 What changes from the spec
+
+| ID | Rule | Spec | v0.2 | Why |
+|----|------|------|------|-----|
+| R1 | DEFEND counter (F11) | none | hitter takes 4× the prevented damage as stability loss + pressure | The lever that moved the dominant policy most: at its maximum in every top-5 configuration of round 1, and 3–4 in all later rounds; **4 is the top of the tested range** |
+| R2 | Whiff cost (F12) | none | −3 energy for ATTACK/SPECIAL with no collision | Makes missing costly; present (2–3) in most top sets, not all |
+| R3 | Dodge mitigation (F3) | none | ×0.65 incoming when a collision still happens | Keeps your Dodge numbers (0.25 / 0.10) and gives Dodge a second effect |
+| R4 | Initiative impact bonus | ×1.08 vs Dodge/Charge | ×1.0 (burst +5% kept) | The bonus punished the two actions that most needed help |
+| R5 | Special economy (F13) | cost 100, charge only | cost 50, +10 meter per hit taken | Special was a seven-turn trap |
+| R6 | Pressure divisor | `Impact / MS` | `Impact / (MS+ST)` = `/100`, scale 3 | Without it Defense-type builds are ring-out victims (win rate 0.00–0.15) |
+| R7 | Energy scale | `/20`, reserve 0, drain ×1, Stamina ×0.8 | `/120`, reserve 20, drain ×0.8, Stamina ×0.9 | At spec values matches last 6–11 turns |
+
+Plus the audit fixes already in v0.1: burst normalization (D2), type classification (D12), Dodge floor (D8).
+
+### 12.2 Results (v0.2 final vs the same calibration without R1–R5)
+
+| Measure | Target (O4 proposal) | No levers, calibrated | v0.2 final (4 fresh seeds × 300 pairs) |
+|---|---|---|---|
+| Median match length | 20–28 turns | 23 | 21–22 |
+| Burst / Ring-out / Spin | 22–38% / 10–30% / 35–60% | 16% / 8% / 76% | 21–22% / 14–15% / 62–65% |
+| Pure ATK policy mean win rate | ≤ 0.58 | 0.62–0.64 | 0.52–0.54 |
+| Best counter to pure ATK | ≥ 0.56 | 0.43–0.47 | 0.64–0.65 |
+| Pure DEF / DOD / CHG | each ≥ 0.36 | 0.50 / 0.38 / 0.43 | 0.41–0.44 / 0.37–0.39 / 0.44–0.46 |
+| Type win-rate range (A, B, D, S) | spread ≤ 0.20 | 0.31–0.82 | 0.37–0.60 (spread 0.13–0.22) |
+| Probabilities in range, no NaN, all terminate | yes | yes | yes — 20,000 matches, max 76 turns, burst P ≤ 0.21, 0 timeouts |
+
+Honest reading: the dominant-policy problem is fixed in this model (Attack no longer wins everything and every pure policy now has a counter ≥ 0.64). **Dodge and Charge→Special are viable (≥ 0.36) but still below average (0.37–0.46); the levers did not make them good**, they stopped them being traps. The scoring penalties on the final seeds (0.27–0.72) come from burst share sitting just under the band (0.21 vs 0.22) and the type spread (up to 0.22 vs 0.20) just over its limit — close, not exact.
+
+### 12.3 What is still wrong (not fixed by any rule set tried)
+
+512 profiles × 60 opponents (skill-mixed policies, noise ≈ ±0.065):
+- Profile win rate: min 0.02, p05 0.14, median 0.55, p95 0.73, max 0.86. **61 of 512 profiles win under 25%; 38 win over 70%.**
+- Blades: B03 0.62, B06 0.60, B02 0.55 … B04 0.41, B05 0.34. Tips: T07 0.62, T01 0.61, T04 0.61 … T08 0.39, **T03 0.20**. Discs are flat (0.48–0.53).
+- Raising burst frequency narrows the blade gap only at burst shares (≈59%) far outside the target band; a larger energy reserve moves the weakest tip from T03 to T05 and pushes ring-out out of band.
+- Cause: AP multiplies every impact, while LI only matters when a burst is possible; T03's speed cannot compensate for SM 15.
+
+This needs a rule (O8), not a number.
+
+### 12.4 Limits of this evidence
+- Fixed/heuristic policies, not optimal play (matrix-game analysis is Phase 6).
+- Sampled build pairs; 40–300 pairs per measurement.
+- Results depend on gap-fills D1–D17 and on R1–R7; all are in this document.
+- `defend_counter` is at the edge of its tested range; the optimum may be higher.
+- One reference model (mine). The GDScript engine must be validated against it and then against the simulator.

@@ -1,0 +1,163 @@
+# calibrate.py
+pen 9.30  ref_p 0.004 ediv 240 pscale 2 | med 15 [p10  8 p90 35] burst 0.15 ring 0.12 spin 0.73 | pure ATK 0.61 DEF 0.49 DOD 0.40 CHG 0.44 | best-counter vs ATK 0.45 DEF 0.60 DOD 0.69 CHG 0.68 | types A0.27 B0.59 D0.13 S0.74
+pen 9.76  ref_p 0.004 ediv 120 pscale 4 | med 12 [p10  7 p90 24] burst 0.10 ring 0.33 spin 0.57 | pure ATK 0.63 DEF 0.50 DOD 0.36 CHG 0.41 | best-counter vs ATK 0.49 DEF 0.65 DOD 0.75 CHG 0.73 | types A0.46 B0.47 D0.00 S0.70
+pen 10.45  ref_p 0.004 ediv 480 pscale 2 | med 15 [p10  9 p90 36] burst 0.16 ring 0.14 spin 0.70 | pure ATK 0.61 DEF 0.50 DOD 0.42 CHG 0.44 | best-counter vs ATK 0.44 DEF 0.59 DOD 0.63 CHG 0.70 | types A0.36 B0.53 D0.00 S0.74
+pen 10.55  ref_p 0.004 ediv 120 pscale 2 | med 14 [p10  7 p90 35] burst 0.13 ring 0.10 spin 0.77 | pure ATK 0.61 DEF 0.49 DOD 0.41 CHG 0.43 | best-counter vs ATK 0.49 DEF 0.57 DOD 0.70 CHG 0.70 | types A0.29 B0.59 D0.00 S0.74
+pen 11.21  ref_p 0.004 ediv 480 pscale 4 | med 13 [p10  8 p90 25] burst 0.12 ring 0.38 spin 0.50 | pure ATK 0.65 DEF 0.49 DOD 0.37 CHG 0.40 | best-counter vs ATK 0.45 DEF 0.65 DOD 0.76 CHG 0.80 | types A0.44 B0.49 D0.00 S0.70
+pen 11.38  ref_p 0.002 ediv  60 pscale 2 | med 12 [p10  7 p90 32] burst 0.06 ring 0.06 spin 0.88 | pure ATK 0.58 DEF 0.49 DOD 0.40 CHG 0.44 | best-counter vs ATK 0.47 DEF 0.60 DOD 0.69 CHG 0.71 | types A0.27 B0.59 D0.13 S0.74
+pen 11.43  ref_p 0.004 ediv  60 pscale 2 | med 12 [p10  6 p90 32] burst 0.12 ring 0.06 spin 0.82 | pure ATK 0.58 DEF 0.49 DOD 0.41 CHG 0.43 | best-counter vs ATK 0.48 DEF 0.60 DOD 0.69 CHG 0.66 | types A0.29 B0.59 D0.00 S0.74
+pen 11.46  ref_p 0.002 ediv 480 pscale 4 | med 13 [p10  8 p90 25] burst 0.07 ring 0.41 spin 0.52 | pure ATK 0.63 DEF 0.48 DOD 0.38 CHG 0.42 | best-counter vs ATK 0.46 DEF 0.66 DOD 0.74 CHG 0.74 | types A0.46 B0.46 D0.00 S0.71
+pen 11.51  ref_p 0.001 ediv 480 pscale 4 | med 14 [p10  8 p90 26] burst 0.03 ring 0.43 spin 0.55 | pure ATK 0.63 DEF 0.49 DOD 0.36 CHG 0.41 | best-counter vs ATK 0.47 DEF 0.65 DOD 0.76 CHG 0.71 | types A0.50 B0.43 D0.00 S0.70
+pen 11.53  ref_p 0.004 ediv 240 pscale 4 | med 13 [p10  8 p90 25] burst 0.11 ring 0.38 spin 0.51 | pure ATK 0.63 DEF 0.51 DOD 0.36 CHG 0.41 | best-counter vs ATK 0.40 DEF 0.60 DOD 0.72 CHG 0.72 | types A0.53 B0.43 D0.00 S0.67
+
+# calibrate2.py
+pen 8.37 ebase  0 dscale 0.6 stshare 1.0 pscale 2 | med 23 [p10 12 p90 55] burst 0.18 ring 0.02 spin 0.79 | pure ATK 0.59 DEF 0.48 DOD 0.39 CHG 0.45 | best-counter vs ATK 0.49 DEF 0.60 DOD 0.65 CHG 0.70 | types A0.28 B0.56 D0.20 S0.76
+pen 8.49 ebase  0 dscale 0.6 stshare 0.5 pscale 2 | med 23 [p10 12 p90 50] burst 0.17 ring 0.06 spin 0.76 | pure ATK 0.59 DEF 0.46 DOD 0.41 CHG 0.44 | best-counter vs ATK 0.49 DEF 0.62 DOD 0.64 CHG 0.64 | types A0.33 B0.58 D0.07 S0.70
+pen 8.61 ebase 60 dscale 1.0 stshare 1.0 pscale 2 | med 39 [p10 15 p90 62] burst 0.31 ring 0.10 spin 0.59 | pure ATK 0.66 DEF 0.46 DOD 0.37 CHG 0.42 | best-counter vs ATK 0.47 DEF 0.64 DOD 0.81 CHG 0.72 | types A0.44 B0.49 D0.07 S0.68
+pen 9.01 ebase  0 dscale 0.6 stshare 1.0 pscale 4 | med 23 [p10 12 p90 43] burst 0.15 ring 0.16 spin 0.69 | pure ATK 0.69 DEF 0.46 DOD 0.36 CHG 0.38 | best-counter vs ATK 0.45 DEF 0.66 DOD 0.80 CHG 0.86 | types A0.27 B0.62 D0.20 S0.70
+pen 9.16 ebase 30 dscale 0.6 stshare 1.0 pscale 2 | med 40 [p10 17 p90 64] burst 0.28 ring 0.10 spin 0.62 | pure ATK 0.68 DEF 0.46 DOD 0.33 CHG 0.40 | best-counter vs ATK 0.49 DEF 0.66 DOD 0.85 CHG 0.81 | types A0.38 B0.51 D0.13 S0.71
+pen 9.35 ebase  0 dscale 0.6 stshare 0.0 pscale 2 | med 21 [p10 12 p90 39] burst 0.14 ring 0.25 spin 0.61 | pure ATK 0.63 DEF 0.50 DOD 0.36 CHG 0.43 | best-counter vs ATK 0.45 DEF 0.61 DOD 0.75 CHG 0.69 | types A0.40 B0.51 D0.00 S0.73
+pen 9.44 ebase 30 dscale 1.0 stshare 1.0 pscale 4 | med 27 [p10 15 p90 44] burst 0.18 ring 0.22 spin 0.60 | pure ATK 0.70 DEF 0.47 DOD 0.32 CHG 0.38 | best-counter vs ATK 0.41 DEF 0.70 DOD 0.84 CHG 0.81 | types A0.38 B0.52 D0.20 S0.68
+pen 9.47 ebase 30 dscale 1.0 stshare 0.0 pscale 2 | med 23 [p10 12 p90 39] burst 0.18 ring 0.34 spin 0.48 | pure ATK 0.68 DEF 0.46 DOD 0.35 CHG 0.41 | best-counter vs ATK 0.45 DEF 0.68 DOD 0.79 CHG 0.81 | types A0.50 B0.48 D0.00 S0.64
+
+# lever_search.py
+BASELINE (no levers): pen 9.70 | med 23 [p10 12 p90 50] burst 0.16 ring 0.08 spin 0.76 | pure ATK 0.62 DEF 0.50 DOD 0.38 CHG 0.43 | best-counter vs ATK 0.43 DEF 0.59 DOD 0.71 CHG 0.78 | types A0.31 B0.57 D0.13 S0.73
+
+Stage 1 top 5:
+ pen 4.10 {'attack_cost': 0, 'whiff_cost': 0, 'defend_counter': 2, 'dodge_incoming': 0.65, 'evade_bonus': 0.2, 'init_mult': 1.0, 'hit_meter_gain': 5, 'special_pierce': 1.0, 'special_cost': 70}
+    med 23 [p10 12 p90 47] burst 0.17 ring 0.09 spin 0.73 | pure ATK 0.59 DEF 0.42 DOD 0.41 CHG 0.44 | best-counter vs ATK 0.56 DEF 0.66 DOD 0.69 CHG 0.76 | types A0.29 B0.60 D0.27 S0.68
+ pen 4.22 {'attack_cost': 0, 'whiff_cost': 2, 'defend_counter': 2, 'dodge_incoming': 0.65, 'evade_bonus': 0.4, 'init_mult': 1.0, 'hit_meter_gain': 5, 'special_pierce': 0, 'special_cost': 100}
+    med 22 [p10 12 p90 48] burst 0.16 ring 0.07 spin 0.77 | pure ATK 0.55 DEF 0.45 DOD 0.47 CHG 0.40 | best-counter vs ATK 0.57 DEF 0.64 DOD 0.61 CHG 0.70 | types A0.31 B0.58 D0.33 S0.67
+ pen 4.29 {'attack_cost': 1, 'whiff_cost': 0, 'defend_counter': 2, 'dodge_incoming': 1.0, 'evade_bonus': 0.4, 'init_mult': 1.08, 'hit_meter_gain': 10, 'special_pierce': 1.0, 'special_cost': 50}
+    med 18 [p10  9 p90 39] burst 0.17 ring 0.08 spin 0.74 | pure ATK 0.51 DEF 0.50 DOD 0.39 CHG 0.52 | best-counter vs ATK 0.57 DEF 0.59 DOD 0.70 CHG 0.60 | types A0.28 B0.59 D0.33 S0.68
+ pen 4.64 {'attack_cost': 0, 'whiff_cost': 2, 'defend_counter': 2, 'dodge_incoming': 1.0, 'evade_bonus': 0, 'init_mult': 1.08, 'hit_meter_gain': 0, 'special_pierce': 0.5, 'special_cost': 70}
+    med 22 [p10 11 p90 46] burst 0.16 ring 0.08 spin 0.76 | pure ATK 0.56 DEF 0.49 DOD 0.37 CHG 0.47 | best-counter vs ATK 0.60 DEF 0.57 DOD 0.70 CHG 0.65 | types A0.36 B0.52 D0.27 S0.69
+ pen 4.80 {'attack_cost': 0, 'whiff_cost': 0, 'defend_counter': 2, 'dodge_incoming': 0.65, 'evade_bonus': 0.4, 'init_mult': 1.08, 'hit_meter_gain': 10, 'special_pierce': 0, 'special_cost': 70}
+    med 22 [p10 11 p90 45] burst 0.19 ring 0.12 spin 0.69 | pure ATK 0.60 DEF 0.42 DOD 0.40 CHG 0.42 | best-counter vs ATK 0.46 DEF 0.66 DOD 0.68 CHG 0.70 | types A0.29 B0.63 D0.33 S0.62
+
+Stage 2 (fresh seed, 150 pairs):
+ pen 3.60 {"attack_cost": 0, "whiff_cost": 2, "defend_counter": 2, "dodge_incoming": 1.0, "evade_bonus": 0, "init_mult": 1.08, "hit_meter_gain": 10, "special_pierce": 0, "special_cost": 70}
+    med 20 [p10 10 p90 38] burst 0.18 ring 0.08 spin 0.74 | pure ATK 0.58 DEF 0.48 DOD 0.34 CHG 0.45 | best-counter vs ATK 0.55 DEF 0.64 DOD 0.74 CHG 0.71 | types A0.39 B0.51 D0.42 S0.69
+ pen 3.64 {"attack_cost": 0, "whiff_cost": 0, "defend_counter": 2, "dodge_incoming": 0.65, "evade_bonus": 0.4, "init_mult": 1.08, "hit_meter_gain": 10, "special_pierce": 0, "special_cost": 70}
+    med 21 [p10 10 p90 41] burst 0.19 ring 0.08 spin 0.73 | pure ATK 0.58 DEF 0.45 DOD 0.40 CHG 0.42 | best-counter vs ATK 0.55 DEF 0.68 DOD 0.68 CHG 0.73 | types A0.39 B0.49 D0.39 S0.75
+ pen 3.84 {"attack_cost": 0, "whiff_cost": 2, "defend_counter": 2, "dodge_incoming": 1.0, "evade_bonus": 0.4, "init_mult": 1.0, "hit_meter_gain": 5, "special_pierce": 0.5, "special_cost": 50}
+    med 20 [p10 10 p90 39] burst 0.19 ring 0.07 spin 0.75 | pure ATK 0.55 DEF 0.50 DOD 0.35 CHG 0.48 | best-counter vs ATK 0.55 DEF 0.62 DOD 0.72 CHG 0.67 | types A0.39 B0.51 D0.40 S0.72
+ pen 4.00 {"attack_cost": 0, "whiff_cost": 0, "defend_counter": 2, "dodge_incoming": 0.65, "evade_bonus": 0, "init_mult": 1.0, "hit_meter_gain": 5, "special_pierce": 1.0, "special_cost": 50}
+    med 22 [p10 11 p90 42] burst 0.18 ring 0.06 spin 0.76 | pure ATK 0.58 DEF 0.43 DOD 0.41 CHG 0.46 | best-counter vs ATK 0.53 DEF 0.67 DOD 0.67 CHG 0.68 | types A0.41 B0.51 D0.39 S0.70
+ pen 4.05 {"attack_cost": 0, "whiff_cost": 0, "defend_counter": 2, "dodge_incoming": 0.65, "evade_bonus": 0.2, "init_mult": 1.0, "hit_meter_gain": 5, "special_pierce": 1.0, "special_cost": 70}
+    med 22 [p10 11 p90 43] burst 0.18 ring 0.05 spin 0.76 | pure ATK 0.58 DEF 0.45 DOD 0.43 CHG 0.45 | best-counter vs ATK 0.56 DEF 0.62 DOD 0.64 CHG 0.66 | types A0.37 B0.51 D0.42 S0.73
+ pen 4.30 {"attack_cost": 1, "whiff_cost": 0, "defend_counter": 2, "dodge_incoming": 1.0, "evade_bonus": 0.4, "init_mult": 1.08, "hit_meter_gain": 10, "special_pierce": 1.0, "special_cost": 50}
+    med 17 [p10  8 p90 34] burst 0.18 ring 0.06 spin 0.76 | pure ATK 0.48 DEF 0.52 DOD 0.40 CHG 0.53 | best-counter vs ATK 0.60 DEF 0.56 DOD 0.69 CHG 0.58 | types A0.37 B0.50 D0.44 S0.72
+ pen 4.38 {"attack_cost": 0, "whiff_cost": 0, "defend_counter": 2, "dodge_incoming": 1.0, "evade_bonus": 0.2, "init_mult": 1.0, "hit_meter_gain": 0, "special_pierce": 0, "special_cost": 50}
+    med 22 [p10 11 p90 42] burst 0.18 ring 0.06 spin 0.77 | pure ATK 0.57 DEF 0.50 DOD 0.36 CHG 0.46 | best-counter vs ATK 0.59 DEF 0.60 DOD 0.71 CHG 0.67 | types A0.37 B0.51 D0.39 S0.75
+ pen 4.73 {"attack_cost": 0, "whiff_cost": 2, "defend_counter": 2, "dodge_incoming": 1.0, "evade_bonus": 0, "init_mult": 1.08, "hit_meter_gain": 0, "special_pierce": 0.5, "special_cost": 70}
+    med 21 [p10 11 p90 41] burst 0.17 ring 0.04 spin 0.78 | pure ATK 0.56 DEF 0.52 DOD 0.39 CHG 0.45 | best-counter vs ATK 0.57 DEF 0.58 DOD 0.66 CHG 0.67 | types A0.36 B0.49 D0.46 S0.74
+ pen 5.18 {"attack_cost": 0, "whiff_cost": 4, "defend_counter": 1, "dodge_incoming": 1.0, "evade_bonus": 0, "init_mult": 1.0, "hit_meter_gain": 10, "special_pierce": 0.5, "special_cost": 70}
+    med 19 [p10  9 p90 38] burst 0.18 ring 0.06 spin 0.76 | pure ATK 0.54 DEF 0.48 DOD 0.38 CHG 0.49 | best-counter vs ATK 0.52 DEF 0.61 DOD 0.70 CHG 0.59 | types A0.38 B0.50 D0.38 S0.76
+ pen 5.27 {"attack_cost": 0, "whiff_cost": 2, "defend_counter": 2, "dodge_incoming": 0.65, "evade_bonus": 0.4, "init_mult": 1.0, "hit_meter_gain": 5, "special_pierce": 0, "special_cost": 100}
+    med 22 [p10 11 p90 42] burst 0.16 ring 0.04 spin 0.80 | pure ATK 0.54 DEF 0.50 DOD 0.47 CHG 0.40 | best-counter vs ATK 0.55 DEF 0.59 DOD 0.61 CHG 0.69 | types A0.35 B0.52 D0.43 S0.74
+ pen 5.69 {"attack_cost": 0, "whiff_cost": 4, "defend_counter": 2, "dodge_incoming": 0.8, "evade_bonus": 0.4, "init_mult": 1.08, "hit_meter_gain": 0, "special_pierce": 0, "special_cost": 50}
+    med 21 [p10 10 p90 41] burst 0.16 ring 0.04 spin 0.80 | pure ATK 0.49 DEF 0.52 DOD 0.45 CHG 0.47 | best-counter vs ATK 0.59 DEF 0.56 DOD 0.58 CHG 0.67 | types A0.33 B0.50 D0.45 S0.77
+ pen 6.07 {"attack_cost": 1, "whiff_cost": 0, "defend_counter": 2, "dodge_incoming": 0.8, "evade_bonus": 0.2, "init_mult": 1.0, "hit_meter_gain": 10, "special_pierce": 0, "special_cost": 70}
+    med 18 [p10  8 p90 37] burst 0.17 ring 0.04 spin 0.80 | pure ATK 0.45 DEF 0.55 DOD 0.49 CHG 0.47 | best-counter vs ATK 0.61 DEF 0.49 DOD 0.58 CHG 0.65 | types A0.37 B0.51 D0.44 S0.71
+
+Baseline re-scored: pen 8.81 | med 23 [p10 11 p90 43] burst 0.17 ring 0.04 spin 0.79 | pure ATK 0.64 DEF 0.49 DOD 0.39 CHG 0.41 | best-counter vs ATK 0.47 DEF 0.65 DOD 0.72 CHG 0.76 | types A0.33 B0.49 D0.40 S0.82
+
+# lever_search2.py
+Stage 2 (fresh seed, 200 pairs):
+ pen 0.45 {"defend_counter": 4, "whiff_cost": 0, "evade_bonus": 0.3, "hit_meter_gain": 5, "special_cost": 70, "pressure_scale": 3.0, "burst_ref_p": 0.006, "drain_scale": 1.0, "energy_base": 20, "stamina_drain": 0.8}
+    med 20 [p10  9 p90 37] burst 0.35 ring 0.09 spin 0.56 | pure ATK 0.56 DEF 0.49 DOD 0.34 CHG 0.41 | best-counter vs ATK 0.65 DEF 0.66 DOD 0.76 CHG 0.74 | types A0.43 B0.51 D0.43 S0.61
+ pen 0.70 {"defend_counter": 4, "whiff_cost": 2, "evade_bonus": 0, "hit_meter_gain": 5, "special_cost": 70, "pressure_scale": 3.0, "burst_ref_p": 0.006, "drain_scale": 1.0, "energy_base": 20, "stamina_drain": 0.8}
+    med 20 [p10  8 p90 37] burst 0.34 ring 0.08 spin 0.58 | pure ATK 0.54 DEF 0.52 DOD 0.35 CHG 0.41 | best-counter vs ATK 0.62 DEF 0.62 DOD 0.74 CHG 0.76 | types A0.47 B0.49 D0.38 S0.62
+ pen 0.72 {"defend_counter": 4, "whiff_cost": 2, "evade_bonus": 0.3, "hit_meter_gain": 5, "special_cost": 70, "pressure_scale": 3.0, "burst_ref_p": 0.006, "drain_scale": 1.0, "energy_base": 20, "stamina_drain": 0.9}
+    med 20 [p10  9 p90 37] burst 0.34 ring 0.08 spin 0.58 | pure ATK 0.55 DEF 0.52 DOD 0.35 CHG 0.42 | best-counter vs ATK 0.62 DEF 0.59 DOD 0.72 CHG 0.74 | types A0.46 B0.50 D0.38 S0.61
+ pen 0.91 {"defend_counter": 3, "whiff_cost": 3, "evade_bonus": 0.3, "hit_meter_gain": 5, "special_cost": 70, "pressure_scale": 5.0, "burst_ref_p": 0.01, "drain_scale": 0.8, "energy_base": 0, "stamina_drain": 0.8}
+    med 14 [p10  6 p90 28] burst 0.35 ring 0.13 spin 0.52 | pure ATK 0.54 DEF 0.52 DOD 0.34 CHG 0.44 | best-counter vs ATK 0.59 DEF 0.58 DOD 0.73 CHG 0.74 | types A0.48 B0.51 D0.46 S0.54
+ pen 1.12 {"defend_counter": 4, "whiff_cost": 3, "evade_bonus": 0.3, "hit_meter_gain": 15, "special_cost": 50, "pressure_scale": 3.0, "burst_ref_p": 0.006, "drain_scale": 0.6, "energy_base": 0, "stamina_drain": 0.8}
+    med 16 [p10  6 p90 34] burst 0.34 ring 0.10 spin 0.55 | pure ATK 0.55 DEF 0.48 DOD 0.32 CHG 0.46 | best-counter vs ATK 0.60 DEF 0.67 DOD 0.78 CHG 0.76 | types A0.45 B0.50 D0.42 S0.61
+ pen 1.52 {"defend_counter": 3, "whiff_cost": 3, "evade_bonus": 0, "hit_meter_gain": 10, "special_cost": 70, "pressure_scale": 5.0, "burst_ref_p": 0.006, "drain_scale": 1.0, "energy_base": 0, "stamina_drain": 0.8}
+    med 13 [p10  7 p90 26] burst 0.23 ring 0.14 spin 0.64 | pure ATK 0.54 DEF 0.51 DOD 0.36 CHG 0.43 | best-counter vs ATK 0.64 DEF 0.61 DOD 0.74 CHG 0.70 | types A0.41 B0.56 D0.36 S0.61
+ pen 1.60 {"defend_counter": 4, "whiff_cost": 2, "evade_bonus": 0.3, "hit_meter_gain": 5, "special_cost": 50, "pressure_scale": 5.0, "burst_ref_p": 0.006, "drain_scale": 1.0, "energy_base": 0, "stamina_drain": 0.8}
+    med 13 [p10  7 p90 26] burst 0.22 ring 0.15 spin 0.63 | pure ATK 0.52 DEF 0.53 DOD 0.34 CHG 0.44 | best-counter vs ATK 0.65 DEF 0.60 DOD 0.75 CHG 0.80 | types A0.41 B0.52 D0.44 S0.63
+ pen 2.07 {"defend_counter": 3, "whiff_cost": 0, "evade_bonus": 0.3, "hit_meter_gain": 5, "special_cost": 70, "pressure_scale": 5.0, "burst_ref_p": 0.006, "drain_scale": 1.0, "energy_base": 0, "stamina_drain": 0.9}
+    med 15 [p10  7 p90 27] burst 0.22 ring 0.12 spin 0.66 | pure ATK 0.57 DEF 0.50 DOD 0.35 CHG 0.42 | best-counter vs ATK 0.63 DEF 0.58 DOD 0.76 CHG 0.75 | types A0.40 B0.53 D0.38 S0.65
+ pen 2.33 {"defend_counter": 3, "whiff_cost": 3, "evade_bonus": 0.3, "hit_meter_gain": 5, "special_cost": 50, "pressure_scale": 3.0, "burst_ref_p": 0.003, "drain_scale": 1.0, "energy_base": 20, "stamina_drain": 0.8}
+    med 22 [p10 12 p90 38] burst 0.21 ring 0.09 spin 0.70 | pure ATK 0.54 DEF 0.49 DOD 0.34 CHG 0.46 | best-counter vs ATK 0.63 DEF 0.62 DOD 0.74 CHG 0.75 | types A0.42 B0.52 D0.36 S0.65
+ pen 2.51 {"defend_counter": 4, "whiff_cost": 2, "evade_bonus": 0, "hit_meter_gain": 10, "special_cost": 70, "pressure_scale": 3.0, "burst_ref_p": 0.003, "drain_scale": 0.6, "energy_base": 0, "stamina_drain": 0.9}
+    med 20 [p10 10 p90 38] burst 0.19 ring 0.12 spin 0.69 | pure ATK 0.55 DEF 0.50 DOD 0.32 CHG 0.42 | best-counter vs ATK 0.64 DEF 0.65 DOD 0.78 CHG 0.79 | types A0.39 B0.52 D0.44 S0.64
+
+# lever_search3.py
+Stage 2 (fresh seed, 200 pairs):
+ pen 0.00 {"defend_counter": 3, "whiff_cost": 3, "hit_meter_gain": 10, "dodge_incoming": 0.5, "evade_bonus": 0.6, "init_mult": 1.0, "dodge_collision": 0.4, "dodge_decay": 0.05}
+    med 24 [p10 12 p90 43] burst 0.24 ring 0.17 spin 0.59 | pure ATK 0.53 DEF 0.41 DOD 0.45 CHG 0.43 | best-counter vs ATK 0.64 DEF 0.71 DOD 0.66 CHG 0.69 | types A0.50 B0.47 D0.44 S0.56
+ pen 0.00 {"defend_counter": 4, "whiff_cost": 3, "hit_meter_gain": 10, "dodge_incoming": 0.5, "evade_bonus": 0.6, "init_mult": 1.0, "dodge_collision": 0.25, "dodge_decay": 0.05}
+    med 24 [p10 12 p90 43] burst 0.24 ring 0.20 spin 0.56 | pure ATK 0.51 DEF 0.42 DOD 0.43 CHG 0.41 | best-counter vs ATK 0.64 DEF 0.73 DOD 0.69 CHG 0.71 | types A0.51 B0.50 D0.40 S0.52
+ pen 0.00 {"defend_counter": 3, "whiff_cost": 3, "hit_meter_gain": 10, "dodge_incoming": 0.65, "evade_bonus": 0.3, "init_mult": 1.08, "dodge_collision": 0.55, "dodge_decay": 0.1}
+    med 24 [p10 12 p90 41] burst 0.24 ring 0.19 spin 0.57 | pure ATK 0.55 DEF 0.41 DOD 0.38 CHG 0.44 | best-counter vs ATK 0.63 DEF 0.74 DOD 0.75 CHG 0.69 | types A0.53 B0.47 D0.43 S0.52
+ pen 0.00 {"defend_counter": 4, "whiff_cost": 3, "hit_meter_gain": 5, "dodge_incoming": 0.65, "evade_bonus": 1.0, "init_mult": 1.08, "dodge_collision": 0.4, "dodge_decay": 0.05}
+    med 25 [p10 12 p90 42] burst 0.23 ring 0.19 spin 0.58 | pure ATK 0.52 DEF 0.45 DOD 0.39 CHG 0.41 | best-counter vs ATK 0.67 DEF 0.73 DOD 0.71 CHG 0.82 | types A0.48 B0.53 D0.42 S0.52
+ pen 0.00 {"defend_counter": 4, "whiff_cost": 3, "hit_meter_gain": 10, "dodge_incoming": 0.65, "evade_bonus": 0.6, "init_mult": 1.0, "dodge_collision": 0.4, "dodge_decay": 0.0}
+    med 24 [p10 12 p90 40] burst 0.23 ring 0.21 spin 0.56 | pure ATK 0.49 DEF 0.42 DOD 0.44 CHG 0.43 | best-counter vs ATK 0.65 DEF 0.75 DOD 0.69 CHG 0.71 | types A0.54 B0.47 D0.43 S0.52
+ pen 0.00 {"defend_counter": 4, "whiff_cost": 3, "hit_meter_gain": 10, "dodge_incoming": 0.65, "evade_bonus": 0, "init_mult": 1.0, "dodge_collision": 0.25, "dodge_decay": 0.1}
+    med 24 [p10 12 p90 41] burst 0.24 ring 0.20 spin 0.55 | pure ATK 0.53 DEF 0.43 DOD 0.37 CHG 0.43 | best-counter vs ATK 0.63 DEF 0.73 DOD 0.73 CHG 0.73 | types A0.52 B0.50 D0.41 S0.51
+ pen 0.00 {"defend_counter": 3, "whiff_cost": 2, "hit_meter_gain": 10, "dodge_incoming": 0.5, "evade_bonus": 0.3, "init_mult": 1.0, "dodge_collision": 0.4, "dodge_decay": 0.1}
+    med 25 [p10 12 p90 43] burst 0.24 ring 0.18 spin 0.57 | pure ATK 0.55 DEF 0.39 DOD 0.44 CHG 0.42 | best-counter vs ATK 0.60 DEF 0.74 DOD 0.67 CHG 0.69 | types A0.53 B0.47 D0.37 S0.54
+ pen 0.00 {"defend_counter": 3, "whiff_cost": 3, "hit_meter_gain": 10, "dodge_incoming": 0.5, "evade_bonus": 1.0, "init_mult": 1.0, "dodge_collision": 0.25, "dodge_decay": 0.1}
+    med 24 [p10 12 p90 43] burst 0.24 ring 0.18 spin 0.58 | pure ATK 0.53 DEF 0.41 DOD 0.44 CHG 0.43 | best-counter vs ATK 0.62 DEF 0.72 DOD 0.66 CHG 0.69 | types A0.53 B0.48 D0.46 S0.50
+ pen 0.00 {"defend_counter": 4, "whiff_cost": 3, "hit_meter_gain": 10, "dodge_incoming": 0.65, "evade_bonus": 0, "init_mult": 1.0, "dodge_collision": 0.4, "dodge_decay": 0.1}
+    med 24 [p10 12 p90 41] burst 0.24 ring 0.21 spin 0.55 | pure ATK 0.53 DEF 0.42 DOD 0.38 CHG 0.43 | best-counter vs ATK 0.66 DEF 0.74 DOD 0.74 CHG 0.70 | types A0.51 B0.48 D0.47 S0.51
+ pen 0.35 {"defend_counter": 4, "whiff_cost": 2, "hit_meter_gain": 5, "dodge_incoming": 0.8, "evade_bonus": 0, "init_mult": 1.0, "dodge_collision": 0.25, "dodge_decay": 0.1}
+    med 25 [p10 12 p90 42] burst 0.24 ring 0.20 spin 0.56 | pure ATK 0.54 DEF 0.46 DOD 0.34 CHG 0.42 | best-counter vs ATK 0.68 DEF 0.71 DOD 0.78 CHG 0.80 | types A0.49 B0.50 D0.45 S0.52
+
+# validate_choice.py
+A_keep_dodge_numbers   seed 101 pen 0.00 | med 23 [p10 12 p90 42] burst 0.24 ring 0.21 spin 0.54 | pure ATK 0.52 DEF 0.45 DOD 0.37 CHG 0.42 | best-counter vs ATK 0.67 DEF 0.73 DOD 0.76 CHG 0.73 | types A0.49 B0.55 D0.38 S0.50
+A_keep_dodge_numbers   seed 202 pen 0.00 | med 23 [p10 13 p90 42] burst 0.23 ring 0.19 spin 0.59 | pure ATK 0.52 DEF 0.44 DOD 0.38 CHG 0.42 | best-counter vs ATK 0.68 DEF 0.75 DOD 0.75 CHG 0.72 | types A0.46 B0.53 D0.44 S0.54
+A_keep_dodge_numbers   seed 303 pen 0.00 | med 23 [p10 12 p90 42] burst 0.24 ring 0.22 spin 0.55 | pure ATK 0.53 DEF 0.44 DOD 0.38 CHG 0.43 | best-counter vs ATK 0.64 DEF 0.74 DOD 0.75 CHG 0.70 | types A0.49 B0.53 D0.39 S0.52
+B_stronger_dodge       seed 101 pen 0.00 | med 24 [p10 12 p90 44] burst 0.24 ring 0.18 spin 0.59 | pure ATK 0.50 DEF 0.41 DOD 0.45 CHG 0.43 | best-counter vs ATK 0.62 DEF 0.73 DOD 0.67 CHG 0.68 | types A0.48 B0.54 D0.37 S0.53
+B_stronger_dodge       seed 202 pen 0.41 | med 24 [p10 13 p90 44] burst 0.21 ring 0.16 spin 0.63 | pure ATK 0.52 DEF 0.40 DOD 0.46 CHG 0.43 | best-counter vs ATK 0.64 DEF 0.74 DOD 0.64 CHG 0.69 | types A0.43 B0.51 D0.41 S0.60
+B_stronger_dodge       seed 303 pen 0.00 | med 24 [p10 13 p90 44] burst 0.23 ring 0.18 spin 0.59 | pure ATK 0.51 DEF 0.41 DOD 0.45 CHG 0.43 | best-counter vs ATK 0.61 DEF 0.72 DOD 0.66 CHG 0.67 | types A0.47 B0.52 D0.41 S0.54
+
+A_keep_dodge_numbers -- 512 profiles x 60 opponents: min 0.03 p05 0.18 p25 0.42 med 0.52 p75 0.62 p95 0.72 max 0.80  (noise ~ +/-0.065)
+  top [('B03D04T06', 0.8), ('B02D02T01', 0.79), ('B06D03T01', 0.78), ('B02D05T01', 0.78)]  bottom [('B05D01T03', 0.03), ('B05D05T03', 0.05), ('B04D08T03', 0.07), ('B04D03T03', 0.1)]
+  by blade: {'B01': 0.49, 'B02': 0.57, 'B03': 0.61, 'B04': 0.41, 'B05': 0.35, 'B06': 0.59, 'B07': 0.52, 'B08': 0.45}
+  by disc: {'D01': 0.48, 'D02': 0.49, 'D03': 0.51, 'D04': 0.49, 'D05': 0.51, 'D06': 0.5, 'D07': 0.51, 'D08': 0.49}
+  by tip: {'T01': 0.6, 'T02': 0.49, 'T03': 0.25, 'T04': 0.55, 'T05': 0.51, 'T06': 0.58, 'T07': 0.58, 'T08': 0.43}
+
+B_stronger_dodge -- 512 profiles x 60 opponents: min 0.07 p05 0.15 p25 0.39 med 0.54 p75 0.63 p95 0.73 max 0.83  (noise ~ +/-0.065)
+  top [('B02D08T07', 0.83), ('B06D01T06', 0.82), ('B06D01T01', 0.8), ('B02D05T04', 0.8)]  bottom [('B05D02T03', 0.07), ('B05D03T03', 0.07), ('B04D04T03', 0.08), ('B05D08T03', 0.08)]
+  by blade: {'B01': 0.49, 'B02': 0.57, 'B03': 0.63, 'B04': 0.4, 'B05': 0.31, 'B06': 0.61, 'B07': 0.53, 'B08': 0.46}
+  by disc: {'D01': 0.49, 'D02': 0.5, 'D03': 0.51, 'D04': 0.5, 'D05': 0.51, 'D06': 0.5, 'D07': 0.49, 'D08': 0.5}
+  by tip: {'T01': 0.6, 'T02': 0.47, 'T03': 0.22, 'T04': 0.58, 'T05': 0.55, 'T06': 0.57, 'T07': 0.6, 'T08': 0.41}
+
+invariants: {} NaN/inf: False
+
+# component_sweep.py
+burst_ref_p ebase | profile p05 p95 | blade range (min..max) | tip range | burst share (sanity run)
+  0.003      20  | 0.20 0.72 | 0.36(B05)..0.60(B06) | 0.26(T03)..0.60(T01) | burst 0.22 ring 0.17 spin 0.60 med 24 pen 0.01
+  0.003      40  | 0.28 0.72 | 0.32(B05)..0.61(B06) | 0.40(T05)..0.57(T06) | burst 0.28 ring 0.33 spin 0.40 med 28 pen 2.66
+  0.003      60  | 0.24 0.76 | 0.30(B05)..0.62(B03) | 0.32(T05)..0.60(T08) | burst 0.29 ring 0.46 spin 0.25 med 30 pen 7.16
+  0.006      20  | 0.25 0.69 | 0.38(B05)..0.59(B03) | 0.30(T03)..0.57(T01) | burst 0.41 ring 0.13 spin 0.47 med 22 pen 0.25
+  0.006      40  | 0.30 0.70 | 0.34(B05)..0.58(B03) | 0.41(T05)..0.55(T01) | burst 0.45 ring 0.23 spin 0.32 med 26 pen 1.46
+  0.006      60  | 0.25 0.72 | 0.34(B05)..0.58(B06) | 0.36(T05)..0.59(T08) | burst 0.47 ring 0.33 spin 0.20 med 27 pen 4.71
+  0.012      20  | 0.30 0.68 | 0.40(B05)..0.56(B06) | 0.38(T03)..0.56(T06) | burst 0.59 ring 0.07 spin 0.33 med 18 pen 2.80
+  0.012      40  | 0.31 0.69 | 0.38(B05)..0.56(B02) | 0.43(T05)..0.56(T08) | burst 0.66 ring 0.13 spin 0.21 med 20 pen 4.70
+  0.012      60  | 0.30 0.69 | 0.37(B05)..0.55(B02) | 0.38(T05)..0.57(T03) | burst 0.70 ring 0.17 spin 0.13 med 20 pen 5.73
+
+# invariants_v02.py
+matches 20000 max turns 74 finishes {'tiebreak': 197, 'spin': 11067, 'burst': 4743, 'ringout': 3866, 'draw': 127}
+  P_burst_max      0.2164
+  P_burst_min      0.0000
+  P_collision_max  0.9000
+  P_collision_min  0.2000
+  P_ringout_max    0.8301
+  P_ringout_min    0.2375
+  energy_max       121.2606
+  energy_min       -8.0342
+  impact_max       890.7733
+  impact_min       10.1262
+  pos_max          178.0109
+  pos_min          0.0000
+  x_burst_max      8603.4443
+  x_burst_min      1.6890
+NaN/inf: False | timeouts: 0
+

@@ -1,0 +1,29 @@
+FINAL v0.2 parameters: {'burst_ref_x': 106.0, 'energy_div': 120, 'pressure_st_share': 1.0, 'attack_cost': 0, 'special_pierce': 0, 'burst_ref_p': 0.003, 'pressure_scale': 3.0, 'energy_base': 20, 'drain_scale': 0.8, 'stamina_drain': 0.9, 'special_cost': 50, 'hit_meter_gain': 10, 'whiff_cost': 3, 'defend_counter': 4, 'dodge_incoming': 0.65, 'evade_bonus': 0, 'init_mult': 1.0, 'dodge_collision': 0.25, 'dodge_decay': 0.1}
+seed 111 pen 0.72 | med 21 [p10 12 p90 41] burst 0.21 ring 0.14 spin 0.65 | pure ATK 0.52 DEF 0.44 DOD 0.39 CHG 0.46 | best-counter vs ATK 0.65 DEF 0.72 DOD 0.71 CHG 0.67 | types A0.43 B0.55 D0.37 S0.58
+seed 222 pen 0.38 | med 22 [p10 12 p90 40] burst 0.22 ring 0.14 spin 0.64 | pure ATK 0.54 DEF 0.42 DOD 0.37 CHG 0.44 | best-counter vs ATK 0.65 DEF 0.73 DOD 0.74 CHG 0.69 | types A0.46 B0.48 D0.43 S0.60
+seed 333 pen 0.42 | med 21 [p10 11 p90 40] burst 0.22 ring 0.15 spin 0.62 | pure ATK 0.53 DEF 0.43 DOD 0.39 CHG 0.44 | best-counter vs ATK 0.64 DEF 0.74 DOD 0.72 CHG 0.68 | types A0.45 B0.52 D0.37 S0.59
+seed 444 pen 0.27 | med 22 [p10 11 p90 41] burst 0.22 ring 0.15 spin 0.63 | pure ATK 0.53 DEF 0.41 DOD 0.38 CHG 0.44 | best-counter vs ATK 0.65 DEF 0.76 DOD 0.74 CHG 0.71 | types A0.45 B0.50 D0.45 S0.58
+
+512 profiles x 60 opponents: min 0.02 p05 0.14 p25 0.40 med 0.55 p75 0.63 p95 0.73 max 0.86 (noise ~ +/-0.065)
+  by blade: {'B01': 0.51, 'B02': 0.55, 'B03': 0.62, 'B04': 0.41, 'B05': 0.34, 'B06': 0.6, 'B07': 0.53, 'B08': 0.46}
+  by disc: {'D01': 0.5, 'D02': 0.5, 'D03': 0.5, 'D04': 0.48, 'D05': 0.53, 'D06': 0.51, 'D07': 0.5, 'D08': 0.5}
+  by tip: {'T01': 0.61, 'T02': 0.46, 'T03': 0.2, 'T04': 0.61, 'T05': 0.56, 'T06': 0.57, 'T07': 0.62, 'T08': 0.39}
+  top [('B03D05T06', 0.86), ('B03D01T01', 0.84), ('B06D02T01', 0.83), ('B03D06T01', 0.8)] bottom [('B05D02T03', 0.02), ('B05D04T03', 0.02), ('B04D04T03', 0.07), ('B05D01T03', 0.07)]
+  profiles below 0.25: 61 / 512,  above 0.70: 38 / 512
+
+invariants over 20000 matches: max turns 76 finishes {'tiebreak': 293, 'ringout': 2792, 'burst': 4369, 'spin': 12405, 'draw': 141}
+  P_burst_max      0.2054
+  P_burst_min      0.0001
+  P_collision_max  0.9000
+  P_collision_min  0.2000
+  P_ringout_max    0.7773
+  P_ringout_min    0.2375
+  energy_max       121.2606
+  energy_min       -9.6742
+  impact_max       894.7828
+  impact_min       10.1260
+  pos_max          172.7281
+  pos_min          0.0000
+  x_burst_max      8112.2511
+  x_burst_min      1.9228
+  NaN/inf: False | timeouts: 0

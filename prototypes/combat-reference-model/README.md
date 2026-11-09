@@ -64,3 +64,24 @@ evidence that the game IS balanced.
 - Random sample of build pairs (250/80 pairs), not all 131,328 pairings.
 - Every number depends on the gap-filling decisions D1–D17; changing one changes
   the results.
+
+## v0.2 lever search (added 2026-11-09)
+
+`ref_model_v02.py` is `ref_model.py` plus lever switches that default to the v0.1
+behaviour (verified: 2,000 of 2,000 matches identical with all levers off; and a
+positive control showing levers change results). `lab.py` scores a setting against
+the proposed targets in `design/gdd/combat-system.md` (open decision O4).
+
+```
+python3 -B -I calibrate.py calibrate2.py        # baseline scale knobs (levers off)
+python3 -B -I lever_search.py lever_search2.py lever_search3.py   # random search, 3 rounds, 2 stages each
+python3 -B -I validate_choice.py component_sweep.py invariants_v02.py
+python3 -B -I validate_final.py                 # the proposed rule set, fresh seeds
+```
+Outputs: `results_v02.txt` (all searches, energy_div 240) and `results_v02_final.txt`
+(the proposed set at energy_div 120). Run scripts one at a time; the search scripts use 4 processes.
+
+Findings: see `design/gdd/combat-system.md` Section 12. In short, rules R1-R7 bring the
+action-level targets close in simulation; the component/build-level imbalance
+(B05, T03 weak; B03, B06 strong; builds from 0.02 to 0.86) is NOT fixed by any
+setting tried and needs a rule change (O8).
