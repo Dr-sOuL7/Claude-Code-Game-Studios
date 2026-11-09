@@ -1,0 +1,76 @@
+# run_audit.py
+profiles 512  types: {'B': 167, 'A': 169, 'S': 128, 'D': 48}  identity-domain: {'None': 32, 'A': 223, 'S': 168, 'D': 89}
+spec examples -> {'B03D02T02': 'A', 'B05D05T07': 'D', 'B04D04T05': 'S', 'B01D01T01': 'B'} (spec expects A, D, S, B)
+
+[1] pairings whose base collision P is already >= 0.9 (cap): 64.1%; pairings where ATTACK's +0.15 changes nothing: 64.1%
+
+[2] 12250 matches. Finish mix: {'burst': '55.8%', 'spin': '44.2%'}
+    turns: min 1 p10 2 median 6 p90 15 max 56 (spec target 20-30)
+    max position_pressure reached: median 12.0 p90 31.7 max 118.7 (ring-out threshold 120)
+
+    Policy win rate (row vs column, draws as half), averaged over the same build pairs and both seats:
+            ATK    DEF    DOD    CHG    RND    ROT    ADP   mean
+      ATK  0.50   0.57   0.78   0.81   0.68   0.58   0.54   0.64
+      DEF  0.43   0.50   0.66   0.70   0.57   0.53   0.44   0.55
+      DOD  0.22   0.34   0.50   0.54   0.39   0.32   0.28   0.37
+      CHG  0.19   0.30   0.46   0.50   0.32   0.26   0.23   0.32
+      RND  0.32   0.43   0.61   0.68   0.50   0.46   0.33   0.48
+      ROT  0.42   0.47   0.68   0.74   0.54   0.50   0.40   0.54
+      ADP  0.46   0.56   0.72   0.77   0.67   0.60   0.50   0.61
+
+[3] Finish mix for selected policy pairs
+    ATK vs ATK: {'burst': '56%', 'spin': '44%'}
+    DEF vs DEF: {'burst': '53%', 'spin': '47%'}
+    DOD vs DOD: {'spin': '56%', 'burst': '44%'}
+    CHG vs ATK: {'burst': '64%', 'spin': '36%'}
+    DEF vs ATK: {'burst': '59%', 'spin': '41%'}
+    RND vs RND: {'burst': '54%', 'spin': '46%'}
+
+[4] Build win rate, RND vs RND, 40 random opponents each (all 512 profiles)
+    min 0.03 p10 0.25 median 0.55 p90 0.70 max 0.82 (sampling noise at n=40 is about +/-0.08)
+    top: [('B02D07T04', 0.82), ('B03D03T01', 0.82), ('B04D08T05', 0.82), ('B01D02T01', 0.8), ('B02D02T07', 0.8)]
+    bottom: [('B01D05T03', 0.03), ('B04D05T03', 0.03), ('B08D05T03', 0.03), ('B05D05T03', 0.05), ('B05D08T03', 0.07)]
+    by blade: {'B01': 0.51, 'B02': 0.55, 'B03': 0.55, 'B04': 0.47, 'B05': 0.38, 'B06': 0.56, 'B07': 0.53, 'B08': 0.48}
+    by disc: {'D01': 0.5, 'D02': 0.55, 'D03': 0.56, 'D04': 0.46, 'D05': 0.42, 'D06': 0.53, 'D07': 0.54, 'D08': 0.47}
+    by tip: {'T01': 0.57, 'T02': 0.45, 'T03': 0.25, 'T04': 0.63, 'T05': 0.61, 'T06': 0.53, 'T07': 0.6, 'T08': 0.39}
+    by type: {'A': 0.46, 'B': 0.5, 'D': 0.34, 'S': 0.63}
+
+[5] Invariant bookkeeping (should hold on every sampled turn):
+    P_burst_max            0.75
+    P_burst_min            0.0008
+    P_collision_max        0.9
+    P_collision_min        0.2
+    P_ringout_max          0.2892
+    P_ringout_min          0.2892
+    energy_max             101.1784
+    energy_min             -37.4697
+    impact_max             783.7756
+    impact_min             10.1266
+    pos_max                123.9204
+    pos_min                0.0
+    x_burst_max            3108.3444
+    x_burst_min            1.5792
+    NaN/inf anywhere: False
+
+# sweep_burst_pressure.py
+ref_p  pscale | med p10 p90 | burst ring spin | policy mean win:  ATK  DEF  DOD  CHG  RND  ROT  ADP | type win A B D S
+0.002   1.0   |   9   4  22 | 0.04  0.00 0.96 | 0.64 0.52 0.37 0.37 0.47 0.53 0.61 | 0.26 0.47 0.35 0.84
+0.002   3.0   |   9   4  20 | 0.04  0.04 0.92 | 0.65 0.52 0.36 0.35 0.47 0.53 0.62 | 0.29 0.45 0.38 0.82
+0.002   6.0   |   8   4  17 | 0.03  0.25 0.72 | 0.67 0.53 0.33 0.34 0.46 0.54 0.63 | 0.38 0.48 0.04 0.79
+0.005   1.0   |   9   4  22 | 0.10  0.00 0.90 | 0.63 0.52 0.37 0.38 0.47 0.53 0.60 | 0.25 0.48 0.35 0.84
+0.005   3.0   |   8   4  20 | 0.09  0.04 0.87 | 0.65 0.51 0.35 0.36 0.48 0.53 0.62 | 0.29 0.45 0.35 0.83
+0.005   6.0   |   8   4  17 | 0.09  0.24 0.67 | 0.66 0.53 0.34 0.34 0.47 0.53 0.63 | 0.38 0.52 0.08 0.72
+0.010   1.0   |   8   3  21 | 0.19  0.00 0.81 | 0.64 0.53 0.37 0.36 0.48 0.53 0.59 | 0.34 0.45 0.38 0.77
+0.010   3.0   |   8   4  19 | 0.18  0.04 0.78 | 0.64 0.51 0.36 0.36 0.48 0.53 0.62 | 0.33 0.49 0.35 0.74
+0.010   6.0   |   7   3  16 | 0.16  0.22 0.62 | 0.66 0.52 0.33 0.34 0.48 0.54 0.64 | 0.40 0.52 0.08 0.70
+0.020   1.0   |   7   3  19 | 0.33  0.00 0.67 | 0.63 0.53 0.37 0.36 0.48 0.51 0.62 | 0.36 0.49 0.31 0.72
+0.020   3.0   |   7   3  18 | 0.33  0.03 0.64 | 0.65 0.54 0.35 0.34 0.47 0.52 0.62 | 0.32 0.49 0.35 0.76
+0.020   6.0   |   7   3  16 | 0.29  0.18 0.53 | 0.67 0.53 0.34 0.32 0.47 0.54 0.63 | 0.39 0.52 0.15 0.69
+
+# sweep_energy.py
+energy_div | med p10 p90 | burst ring spin | policy mean win:  ATK  DEF  DOD  CHG  RND  ROT  ADP | type win A B D S
+    20     |   8   4  19 | 0.18  0.04 0.78 | 0.64 0.51 0.36 0.36 0.48 0.53 0.62 | 0.33 0.49 0.35 0.74
+    40     |  10   5  23 | 0.25  0.10 0.65 | 0.64 0.52 0.35 0.39 0.48 0.53 0.60 | 0.38 0.51 0.31 0.68
+    80     |  12   5  25 | 0.29  0.16 0.55 | 0.64 0.52 0.35 0.41 0.47 0.51 0.60 | 0.36 0.52 0.27 0.70
+   160     |  13   5  26 | 0.32  0.19 0.49 | 0.62 0.52 0.38 0.38 0.49 0.53 0.58 | 0.43 0.47 0.19 0.69
+   320     |  14   6  27 | 0.33  0.21 0.46 | 0.65 0.51 0.37 0.40 0.47 0.52 0.58 | 0.42 0.48 0.31 0.66

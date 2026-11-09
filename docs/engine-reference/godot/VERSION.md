@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Engine Version** | Godot 4.7 |
-| **Installed at pin time** | NOT DETERMINED — `godot` not found on PATH in the cloud dev container (probed 2026-11-09). Absence of the binary there says nothing about the developer's machine. |
+| **Installed at pin time** | 4.7.2.stable.official.ed1daf0bf in the cloud dev container (installed 2026-11-09 from the official godot-builds release; SHA-512 matched). A patch ahead of the 4.7 pin. The developer's own machine is not probed. |
 | **Release Date** | June 2026 (latest patch: 4.7.2, August 2026) |
 | **Project Pinned** | 2026-10-17 |
 | **Last Docs Verified** | 2026-10-17 (release timeline and 4.7 changes); 2026-02-12 (4.4-4.6 content) |
