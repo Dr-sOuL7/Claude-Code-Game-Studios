@@ -62,7 +62,13 @@
 ## Architecture Decisions Log
 
 <!-- Quick reference linking to full ADRs in docs/architecture/ -->
-- [No ADRs yet — use /architecture-decision to create one]
+- ADR-0001 Combat engine: pure deterministic data-driven GDScript library — Proposed
+- ADR-0002 Network topology and transport: Web client, headless Godot server, WebSocket — Proposed
+- ADR-0003 Authoritative match lifecycle: commit, resolve, timers, reconnection — Proposed
+- ADR-0004 Accounts and persistence: Supabase Auth + Postgres, server-only writes — Proposed
+- ADR-0005 Build, deploy and CI: single-threaded Web PWA, container server, GitHub Actions — Proposed
+- ADR-0006 Balance and verification strategy: property tests, differential oracle, headless simulator — Proposed
+- Files: `docs/architecture/adr-000N-*.md`. None is Accepted; only the owner (or technical-director on the owner's confirmation) may accept.
 
 ## Engine Specialists
 
