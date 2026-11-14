@@ -1,0 +1,11 @@
+{
+  "_doc": "Practice CPU for the first playable (src/ai/cpu_policy.gd). Weighted random choice over legal actions, reading only public state. Weights are relative; adjustments are added when their condition holds. Not a balance reference.",
+  "version": "v1",
+  "base_weights": {"attack": 3.0, "defend": 2.0, "dodge": 1.5, "charge": 1.5, "special": 5.0},
+  "behind_on_energy": {"defend": 1.5, "dodge": 0.5},
+  "opponent_repeats_attack": {"repeats": 2, "defend": 2.5, "dodge": 1.0},
+  "opponent_turtling": {"guard_stack": 2, "attack": 1.5, "charge": 2.0},
+  "meter_nearly_ready": {"fraction_of_cost": 0.7, "charge": 2.5},
+  "low_stability": {"threshold": 40.0, "defend": 1.5, "attack": -1.0},
+  "high_pressure": {"fraction_of_ringout": 0.75, "defend": 2.0, "dodge": 1.0}
+}
