@@ -1,0 +1,34 @@
+{
+  "_doc": "SPINFORGE component catalogue. Owner spec (design/gdd/combat-system.md, Top Construction). Conservation: blade ap+li=80, disc ms+st=100, tip mb+sm=100. Values are integers; never add a part that breaks the sum.",
+  "version": 1,
+  "blades": {
+    "B01": {"ap": 40, "li": 40, "label": "Balanced"},
+    "B02": {"ap": 50, "li": 30, "label": "Aggressive striker"},
+    "B03": {"ap": 60, "li": 20, "label": "Glass cannon"},
+    "B04": {"ap": 30, "li": 50, "label": "Defensive blade"},
+    "B05": {"ap": 20, "li": 60, "label": "Burst tank"},
+    "B06": {"ap": 55, "li": 25, "label": "Heavy attacker"},
+    "B07": {"ap": 45, "li": 35, "label": "Controlled attacker"},
+    "B08": {"ap": 35, "li": 45, "label": "Stability hybrid"}
+  },
+  "discs": {
+    "D01": {"ms": 50, "st": 50, "label": "Balanced"},
+    "D02": {"ms": 65, "st": 35, "label": "Heavy attacker support"},
+    "D03": {"ms": 80, "st": 20, "label": "Extreme mass"},
+    "D04": {"ms": 35, "st": 65, "label": "Defense-oriented"},
+    "D05": {"ms": 20, "st": 80, "label": "Ultra stability"},
+    "D06": {"ms": 70, "st": 30, "label": "Pressure build"},
+    "D07": {"ms": 60, "st": 40, "label": "Hybrid"},
+    "D08": {"ms": 40, "st": 60, "label": "Controlled defense"}
+  },
+  "tips": {
+    "T01": {"mb": 50, "sm": 50, "label": "Balanced"},
+    "T02": {"mb": 70, "sm": 30, "label": "Attack mobility"},
+    "T03": {"mb": 85, "sm": 15, "label": "Extreme speed"},
+    "T04": {"mb": 30, "sm": 70, "label": "Stamina focus"},
+    "T05": {"mb": 15, "sm": 85, "label": "Ultra stamina"},
+    "T06": {"mb": 60, "sm": 40, "label": "Hybrid attacker"},
+    "T07": {"mb": 40, "sm": 60, "label": "Defensive stamina"},
+    "T08": {"mb": 75, "sm": 25, "label": "Unstable attacker"}
+  }
+}

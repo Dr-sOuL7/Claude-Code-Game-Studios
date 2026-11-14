@@ -1,0 +1,21 @@
+{
+  "_doc": "Cores are cosmetic only: a name, a two-tone palette (hex sRGB) and a one-word theme. No stat may ever be added here (design/gdd/game-concept.md, Pillar 2).",
+  "version": 1,
+  "cores": {
+    "aetherion": {"name": "Aetherion", "primary": "#22D3EE", "secondary": "#F8FAFC", "theme": "balance"},
+    "draknor":   {"name": "Draknor",   "primary": "#DC2626", "secondary": "#0A0A0A", "theme": "aggression"},
+    "veltrix":   {"name": "Veltrix",   "primary": "#7C3AED", "secondary": "#C0C0C0", "theme": "precision"},
+    "nyxalon":   {"name": "Nyxalon",   "primary": "#1E3A8A", "secondary": "#0A0A0A", "theme": "defense"},
+    "pyronis":   {"name": "Pyronis",   "primary": "#F97316", "secondary": "#D4AF37", "theme": "explosive"},
+    "zephyros":  {"name": "Zephyros",  "primary": "#38BDF8", "secondary": "#22C55E", "theme": "speed"},
+    "gravion":   {"name": "Gravion",   "primary": "#6B7280", "secondary": "#8A9BA8", "theme": "weight"},
+    "luminara":  {"name": "Luminara",  "primary": "#F8FAFC", "secondary": "#D4AF37", "theme": "stability"},
+    "obsidrax":  {"name": "Obsidrax",  "primary": "#0A0A0A", "secondary": "#DC143C", "theme": "brutal force"},
+    "crysalix":  {"name": "Crysalix",  "primary": "#A5F3FC", "secondary": "#F8FAFC", "theme": "control"},
+    "voltaris":  {"name": "Voltaris",  "primary": "#FACC15", "secondary": "#2563EB", "theme": "high tempo"},
+    "umbros":    {"name": "Umbros",    "primary": "#4C1D95", "secondary": "#0A0A0A", "theme": "evasion"},
+    "solvane":   {"name": "Solvane",   "primary": "#D4AF37", "secondary": "#DC2626", "theme": "dominance"},
+    "tyralis":   {"name": "Tyralis",   "primary": "#CD7F32", "secondary": "#14532D", "theme": "endurance"},
+    "noctyra":   {"name": "Noctyra",   "primary": "#191970", "secondary": "#8B5CF6", "theme": "stealth"}
+  }
+}

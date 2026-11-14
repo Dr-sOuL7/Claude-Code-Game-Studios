@@ -38,32 +38,117 @@
 #   line in any other shape is reported as unsupported layout, with its number.
 
 version: 1
-last_updated: ""
+last_updated: "2026-11-14"
 
-requirements: []
+requirements:
+- id: TR-combat-001
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "Deterministic: the same (state, actions, seed) yields identical new state and event list (AC-4)"
+  created: 2026-11-14
+  revised: ""
+  status: active
 
-# --- EXAMPLE ENTRIES (remove when first real entries are added) ---
-#
-# - id: TR-combat-001
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Player takes damage from enemies based on attack power minus defence"
-#   created: 2026-03-10
-#   revised: ""
-#   status: active
-#
-# - id: TR-combat-002
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Combo window timing is 0.4 seconds between hits"
-#   created: 2026-03-10
-#   revised: "2026-04-01"
-#   status: active
-#
-# - id: TR-combat-003
-#   system: combat
-#   gdd: design/gdd/combat-system.md
-#   requirement: "Old damage formula using raw stats"
-#   created: 2026-03-10
-#   revised: ""
-#   status: "superseded-by: TR-combat-001"
+- id: TR-combat-002
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "Core is cosmetic: changing only the Core never changes any engine output (AC-3)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-combat-003
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "Probabilities bounded for every reachable state: collision in [0.2, 0.9], burst in [0, burst_cap], ring-out in [0, 0.9]; no NaN or infinity (AC-1)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-combat-004
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "resolve_turn validates both actions before mutating anything; an illegal SPECIAL (meter below special_cost) is rejected, never substituted (Rule 3, E7)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-combat-005
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "Hidden commit: a pending action is never exposed to the opponent or spectators before the turn resolves (Rule 4, AC-7)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-combat-006
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "Every match terminates within the bound derived from the slowest passive drain of the loaded ruleset (E10, AC-8)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-combat-007
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "Seat symmetry: swapping seats of two builds with mirrored RNG streams yields the mirrored outcome (AC-5)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-combat-008
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "All tuning knobs (Section 8) are read from an external, versioned ruleset data file; a published version is never edited"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-combat-009
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "The worked examples in Formulas F2-F5 reproduce to +/-0.01 (AC-9)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-combat-010
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "The event list returned by resolve_turn is the only engine output presentation, network and replay may consume"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-combat-011
+  system: combat
+  gdd: design/gdd/combat-system.md
+  requirement: "No ruleset is called balanced without a simulator report meeting the declared bands (O4; ADR-0006)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-construction-001
+  system: construction
+  gdd: design/gdd/combat-system.md
+  requirement: "Conservation: every Blade has AP+LI=80, every Disc MS+ST=100, every Tip MB+SM=100; every build totals 280 (AC-2)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-construction-002
+  system: construction
+  gdd: design/gdd/combat-system.md
+  requirement: "Type classification F0: normalised scores with margin 0.15; B03D02T02=Attack, B05D05T07=Defense, B04D04T05=Stamina, B01D01T01=Balance; distribution 169/167/128/48 (AC-6)"
+  created: 2026-11-14
+  revised: ""
+  status: active
+
+- id: TR-construction-003
+  system: construction
+  gdd: design/gdd/game-concept.md
+  requirement: "Cores are cosmetic only: a name and a two-tone palette; no core field reaches the engine"
+  created: 2026-11-14
+  revised: ""
+  status: active
