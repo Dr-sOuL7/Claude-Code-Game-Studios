@@ -8,13 +8,13 @@
 
 ## Summary
 
-Turn-based, simultaneous-commit duel between two Beyblades built from CORE + BLADE + DISC + TIP. Each turn both players secretly choose one of five actions; the engine resolves engagement, collision, and system effects, then checks three finishes: Burst, Ring-Out, Spin Finish.
+Turn-based, simultaneous-commit duel between two tops built from CORE + BLADE + DISC + TIP. Each turn both players secretly choose one of five actions; the engine resolves engagement, collision, and system effects, then checks three finishes: Burst, Ring-Out, Spin Finish.
 
-> **Quick reference** — Layer: `Core` · Priority: `MVP` · Key deps: `Beyblade Construction (components, derived stats, type)`
+> **Quick reference** — Layer: `Core` · Priority: `MVP` · Key deps: `Top Construction (components, derived stats, type)`
 
 ## Overview
 
-Two players each hold a Beyblade whose six stats (AP, LI, MS, ST, MB, SM) are fixed by its parts and sum to 280 for every build (Blade 80 + Disc 100 + Tip 100). There is no progression and no hard cap; extremes carry built-in penalties. Each turn both players commit one action (ATTACK, DEFEND, DODGE, CHARGE, SPECIAL). The engine rolls whether the two Beyblades collide, computes impact both ways, applies stability damage, recoil, position pressure, burst checks and energy loss, then applies passive drains. The first player to burst, be rung out, or run out of energy loses.
+Two players each hold a top whose six stats (AP, LI, MS, ST, MB, SM) are fixed by its parts and sum to 280 for every build (Blade 80 + Disc 100 + Tip 100). There is no progression and no hard cap; extremes carry built-in penalties. Each turn both players commit one action (ATTACK, DEFEND, DODGE, CHARGE, SPECIAL). The engine rolls whether the two tops collide, computes impact both ways, applies stability damage, recoil, position pressure, burst checks and energy loss, then applies passive drains. The first player to burst, be rung out, or run out of energy loses.
 
 The engine is a pure, deterministic, seeded GDScript library with no scene dependencies (`src/core/combat/`), shared by Practice, Local Versus, and the authoritative server. This document is its single source of truth.
 
@@ -26,7 +26,7 @@ You read your opponent's build and habits, then out-think them: commit to a hit,
 
 ### Core Rules
 
-Notation: stats `AP, LI, MS, ST, MB, SM` of the *acting* Beyblade are written bare; the opponent's carry an `opp_` prefix. Rules marked **[D#]** are gap-fills of the original spec; see Section 10.
+Notation: stats `AP, LI, MS, ST, MB, SM` of the *acting* top are written bare; the opponent's carry an `opp_` prefix. Rules marked **[D#]** are gap-fills of the original spec; see Section 10.
 
 1. **Match**: players choose builds, then loop turns until a finish. Turn number `t` starts at 1. Passive drain guarantees termination (Section 5, E10).
 2. **Turn order**: (1) both commit an action; (2) roll collision; (3) if collided, resolve impact, stability, recoil, pressure, energy, burst; if not, apply passive pressure; (4) system effects (drain, charge, stacks); (5) check finishes; (6) update state.
@@ -36,7 +36,7 @@ Notation: stats `AP, LI, MS, ST, MB, SM` of the *acting* Beyblade are written ba
 
 ### States and Transitions
 
-Static per Beyblade: `AP, LI, MS, ST, MB, SM`, `type ∈ {Attack, Defense, Stamina, Balance}`, `domain` (identity bonus, nullable).
+Static per top: `AP, LI, MS, ST, MB, SM`, `type ∈ {Attack, Defense, Stamina, Balance}`, `domain` (identity bonus, nullable).
 
 Dynamic per player: `energy` (start `1.2 × SM`), `stability_level` (start 100) **[D1]**, `position_pressure` (start 0), `passive_pressure` (0), `special_meter` (0–100), `guard_stack`, `dodge_stack`, `combo_count`, `last_action`, `repeat_count`.
 
@@ -44,7 +44,7 @@ Match states: `COMMITTING` → `RESOLVING` → (`COMMITTING` | `FINISHED`). `RES
 
 ### Interactions with Other Systems
 
-- **Beyblade Construction**: supplies derived stats, type, domain (Section 4, F0).
+- **Top Construction**: supplies derived stats, type, domain (Section 4, F0).
 - **Practice AI / Online / Local / Spectator**: all call `resolve_turn(state, action_a, action_b, rng)`; none reimplement combat. Online uses server-held actions and broadcasts events after resolution.
 - **Battle UI / 3D**: render the event list the engine returns; they never compute combat.
 - **Simulation tool**: runs the same engine headless for balance (Phase 6).
@@ -107,7 +107,7 @@ recoil (hitter, own stability) = Impact_out / ST_eff_self × (0.85 if Defense ty
 position_pressure += Impact_in / (MS + pressure_st_share × ST) × pressure_scale + passive_pressure; passive_pressure = 0   [D5]
 energy −= Impact_in / energy_div                       (target)  [D4]
 ```
-Spec values: `pressure_st_share` 0 (divisor MS), `pressure_scale` 1, `energy_div` 20. **v0.2 proposes 1.0 / 3 / 120 (R6, R7). With share 1.0 the divisor is MS + ST = 100 for every disc, i.e. the disc no longer affects how easily a Beyblade is pushed. This replaces the spec's `Impact / MS` and is decision O9.**
+Spec values: `pressure_st_share` 0 (divisor MS), `pressure_scale` 1, `energy_div` 20. **v0.2 proposes 1.0 / 3 / 120 (R6, R7). With share 1.0 the divisor is MS + ST = 100 for every disc, i.e. the disc no longer affects how easily a top is pushed. This replaces the spec's `Impact / MS` and is decision O9.**
 Example (spec values): 84.8 / ST_eff 50 → stability −1.70; pressure +84.8/50 = 1.70; energy −84.8/20 = 4.24.
 
 **F5 — Burst probability** *(the spec's `Impact × MS/LI` ranges 15–615 per Attack hit and is not a probability)* **[D2]**
@@ -169,7 +169,7 @@ P_ringout = min(0.90, 0.25 + (position_pressure − 120)/100) × (1 − 0.005 ×
 
 ## Dependencies
 
-- **Upstream**: Beyblade Construction (component data, derived stats). *That system's doc must mention Combat as a dependent when it is written.*
+- **Upstream**: Top Construction (component data, derived stats). *That system's doc must mention Combat as a dependent when it is written.*
 - **Downstream (depend on this)**: Practice AI, Local Versus, Online PvP/Server, Spectator, Battle UI, 3D presentation, Match history/replay, Balance simulator, Rankings.
 - Both directions to be registered in `design/gdd/systems-index.md` by `/map-systems`.
 

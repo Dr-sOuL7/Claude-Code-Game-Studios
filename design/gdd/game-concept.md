@@ -1,7 +1,7 @@
-# Game Concept: Beyblade: Arena (working title)
+# Game Concept: SPINFORGE
 
 *Created: 2026-11-09*
-*Status: Draft — written from the owner's directive. Items marked **[PROPOSED]** are Claude's recommendations under delegated authority and are not yet confirmed by the owner.*
+*Status: Approved by the owner 2026-11-14 (pillars, visual anchor and recommendations accepted as proposed; **[PROPOSED]** markers are kept to show which items originated as Claude's recommendations). Title: SPINFORGE.*
 
 ---
 
@@ -22,7 +22,7 @@
 | **Session Length** | One match ≈ 3–6 minutes **[estimate: ~21 median turns in simulation × turn time]**; sessions 20–60 min |
 | **Monetization** | None decided. Hard rule from the owner: nothing that touches stats, rarity or part power. If ever, **[PROPOSED]** cosmetic only (Core visuals) |
 | **Estimated Scope** | Large (**[PROPOSED]** 6–10 months solo owner + AI agents to a public launch; unconfirmed — to be set in `/sprint-plan`). First playable milestone is far smaller |
-| **Comparable Titles** | Pokémon Showdown (browser competitive turn-based), YOMI Hustle (simultaneous-commit fighting), classic Beyblade-style tops as theme |
+| **Comparable Titles** | Pokémon Showdown (browser competitive turn-based), YOMI Hustle (simultaneous-commit fighting), battling-top toy franchises as theme |
 
 ---
 
@@ -44,7 +44,7 @@ It's like Pokémon Showdown's build-and-counter depth, **and also** every part t
 
 | Aesthetic | Priority | How We Deliver It |
 | ---- | ---- | ---- |
-| **Sensation** | 3 | Metallic Beyblade models, energy trails, impact, burst and ring-out animations driven by engine events |
+| **Sensation** | 3 | Metallic top models, energy trails, impact, burst and ring-out animations driven by engine events |
 | **Fantasy** | 5 | Forging and launching your own top; core colour identities |
 | **Narrative** | N/A | None at launch; Cores reserve visual identity for the future |
 | **Challenge** | 1 | Reading an opponent, bounded randomness, counterplay for every strategy |
@@ -60,7 +60,7 @@ It's like Pokémon Showdown's build-and-counter depth, **and also** every part t
 - Players keep several builds for different matchups.
 
 ### Core Mechanics (Systems we build)
-1. **Beyblade construction** — CORE (cosmetic) + BLADE + DISC + TIP, constant stat budgets, derived stats and emergent type.
+1. **top construction** — CORE (cosmetic) + BLADE + DISC + TIP, constant stat budgets, derived stats and emergent type.
 2. **Simultaneous-commit combat** — five actions, collision, impact, stability, recoil, pressure, energy, burst probability (see `design/gdd/combat-system.md`).
 3. **Three finishes** — Burst, Ring-Out, Spin Finish.
 4. **Server-authoritative multiplayer** — matchmaking, invitations, timers, reconnection, spectators.
@@ -184,7 +184,7 @@ Premium metallic visuals and effects exist to communicate state, never to hide i
 | **Audio Needs** | Moderate: impact/burst/ring-out SFX, light adaptive music |
 | **Networking** | Client-server, dedicated authoritative server, WebSocket |
 | **Content Volume** | 24 parts + 15 cores, 3+ arenas, 14 screens; no levels or story |
-| **Procedural Systems** | Procedural Beyblade geometry from stats (visual only) |
+| **Procedural Systems** | Procedural top geometry from stats (visual only) |
 
 ---
 
@@ -202,7 +202,7 @@ Premium metallic visuals and effects exist to communicate state, never to hide i
 - Determinism across platforms must be proven by tests, not assumed.
 
 ### Market Risks
-- **Naming / IP**: "Beyblade" is a registered trademark of third parties. A public or monetized product under that name is a legal risk. **Recommendation: use a non-infringing public title before any launch, and keep "Beyblade" as an internal working title only.** The owner decides; this is flagged, not resolved.
+- **Naming / IP**: the original working title used a third-party registered trademark. **Resolved 2026-11-14: the owner chose the public title SPINFORGE**; the trademarked word must not appear in the product, store listing or marketing. Part and core names are original.
 - Niche audience: matchmaking needs enough players online at once (mitigated by AI opponents and private invites).
 
 ### Scope Risks
@@ -222,7 +222,7 @@ Premium metallic visuals and effects exist to communicate state, never to hide i
 **Core hypothesis**: Simultaneous hidden commits between five actions create tense, readable duels where build choice and reads decide the winner, in a browser.
 
 **Required for MVP (first playable milestone)**:
-1. Beyblade Workshop: pick Core/Blade/Disc/Tip, see derived stats and type live.
+1. Forge (workshop): pick Core/Blade/Disc/Tip, see derived stats and type live.
 2. Combat engine (pure GDScript, deterministic, tested) with the five actions and three finishes.
 3. Local Versus (hidden-commit pass-the-device) in a browser build.
 4. Battle arena with events animated and a state HUD; result screen explaining the finish.
@@ -249,7 +249,7 @@ Premium metallic visuals and effects exist to communicate state, never to hide i
 
 **Direction: Neon Forge.** *Metal you can feel, light that tells you what's happening.*
 
-- **Light carries meaning**: each Beyblade glows in its Core's two-tone palette; glow intensity maps to energy and state. *Design test*: an effect with no gameplay meaning is removed.
+- **Light carries meaning**: each top glows in its Core's two-tone palette; glow intensity maps to energy and state. *Design test*: an effect with no gameplay meaning is removed.
 - **Dark arena, bright information**: a dark, high-contrast arena keeps the HUD readable on phones. *Design test*: HUD text meets contrast requirements on the brightest effect.
 - **Silhouette tells the build**: procedural meshes expose stats (blade reach, disc mass, tip shape). *Design test*: two builds with different stats must not look the same.
 

@@ -2,13 +2,13 @@
 
 ## Status
 
-Proposed
+Accepted
 
 > Only the user (or `technical-director` on the user's explicit confirmation) may set `Accepted`.
 
 ## Date
 
-2026-11-09
+2026-11-09 (proposed); accepted 2026-11-14
 
 ## Last Verified
 
@@ -16,7 +16,7 @@ Proposed
 
 ## Decision Makers
 
-Owner (delegated to Claude for a proposal); technical-director review pending.
+Owner (accepted 2026-11-14, on Claude's recommendation); authored by Claude.
 
 ## Summary
 
