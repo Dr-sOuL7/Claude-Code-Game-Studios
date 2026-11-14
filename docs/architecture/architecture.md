@@ -209,7 +209,7 @@ Traceability: TR-combat-001…011, TR-construction-001…003, TR-online-001…00
 |----|---------|----------|-----------------|
 | QQ-01 | Component-level imbalance (O8): which LI/MB/AP rule set ships in ruleset v1 | High | `combat-system.md` v0.3 after the current sweep; simulator report |
 | QQ-02 | TLS WebSocket from a Godot Web client to a headless Godot server behind a real host | High | Spike story before any online epic (ADR-0002) |
-| QQ-03 | GDScript engine throughput for the simulator | Medium | Benchmark in the first engine story (ADR-0006) |
+| QQ-03 | GDScript engine throughput for the simulator | Low — measured 2026-11-14: ≈ 12,100 turns/s with full tracing (`production/qa/evidence/combat-engine-oracle.md`) | Re-measure without tracing in the simulator epic |
 | QQ-04 | Supabase CORS/RLS/JWT-validation behaviour from the Web export | Medium | Spike from the staging origin (ADR-0004) |
 | QQ-05 | Mobile WebGL 2 frame budget; Safari issues | Medium | Profile the first arena scene on real devices (ADR-0005) |
 | QQ-06 | Turn timer and timeout action (O5) | Medium | Simulate timeout abuse; owner sets the value |

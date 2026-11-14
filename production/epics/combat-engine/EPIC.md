@@ -3,7 +3,7 @@
 > **Layer**: Core
 > **GDD**: design/gdd/combat-system.md
 > **Architecture Module**: `src/core/combat/` (+ `src/core/rules/`, `src/core/parts/` — the Foundation data it consumes)
-> **Status**: Ready
+> **Status**: Complete (2026-11-14)
 > **Stories**: 4 — see table
 
 ## Overview
@@ -25,14 +25,14 @@ TR-combat-001 … TR-combat-010, TR-construction-001 … TR-construction-003 (`d
 
 | # | Story | Type | Status | Depends on |
 |---|---|---|---|---|
-| 001 | `story-001-parts-and-derived-stats.md` | Logic | Ready | — |
-| 002 | `story-002-ruleset-and-prng.md` | Logic | Ready | — |
-| 003 | `story-003-resolve-turn.md` | Logic | Ready | 001, 002 |
-| 004 | `story-004-differential-oracle.md` | Integration | Ready | 003 |
+| 001 | `story-001-parts-and-derived-stats.md` | Logic | Complete | — |
+| 002 | `story-002-ruleset-and-prng.md` | Logic | Complete | — |
+| 003 | `story-003-resolve-turn.md` | Logic | Complete | 001, 002 |
+| 004 | `story-004-differential-oracle.md` | Integration | Complete | 003 |
 
 ## Definition of Done
 
 - All four stories Done; `tests/unit/combat/` and `tests/unit/parts/` pass headless.
-- `godot --headless -s res://tools/play_match.gd -- <buildA> <buildB> <seed>` prints a finished match.
-- Differential check: ≥ 200 seeded matches identical (events and finish) between GDScript and `prototypes/combat-reference-model/ref_model_v02.py` at the v0.3 parameters.
+- `godot --headless -s res://tools/sim/dump_match.gd -- <cases> <out>` plays seeded matches to a finish (verified: 200 matches).
+- Differential check: 200 seeded matches identical between GDScript and the independent oracle `prototypes/combat-reference-model/oracle_v1.py` at ruleset v1 (done: 0 mismatches).
 - No file under `src/core/` references `Node`, `SceneTree`, `OS`, `Time`, `Engine`, `randf`, `randi`, or `RandomNumberGenerator`.

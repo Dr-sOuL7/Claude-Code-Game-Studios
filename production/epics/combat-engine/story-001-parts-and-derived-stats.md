@@ -1,7 +1,7 @@
 # Story 001: Component catalogue and derived stats
 
 > **Epic**: Combat Engine
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Foundation
 > **Type**: Logic
 > **Estimate**: S
@@ -55,7 +55,7 @@ N/A — no qa-lead specs at this tier (lean); implement against the Acceptance C
 
 **Story Type**: Logic
 **Required evidence**: `tests/unit/parts/*_test.gd` — must exist and pass.
-**Status**: [ ] Not yet created
+**Status**: [x] Created and passing (26 tests at story close; 58 with story 003's suites; see `production/qa/evidence/combat-engine-oracle.md` for 004)
 
 ## Dependencies
 

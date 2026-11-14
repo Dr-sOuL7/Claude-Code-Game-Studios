@@ -34,6 +34,16 @@ Notation: stats `AP, LI, MS, ST, MB, SM` of the *acting* top are written bare; t
 4. **Hidden commit**: neither player (nor any spectator) sees the opponent's action before both have committed and the turn has resolved.
 5. **Finishes** (checked in this order each turn **[D13]**): Burst → Ring-Out → Spin Finish. A player who is hit by a burst loses immediately.
 
+### Resolution Order and Randomness (contract shared by the engine and the oracle)
+
+Added with story combat-engine/004; both implementations follow this text, and where either disagrees the GDD wins.
+
+1. **Per turn**: both actions are validated; then (a) collision roll, (b) if collided: outgoing impacts for both players, incoming impacts after each target's mitigation, damage to both targets, Defend counters against both hitters, burst rolls against both targets, recoil on both hitters; if not collided: passive pressure for non-attackers; (c) upkeep (drain, attack and whiff cost, pressure drain, charge, stacks) for both players; (d) finishes. Every sub-step is applied to **both** players before the next sub-step starts, so the result does not depend on which player is seat 0.
+2. **Burst rolls use post-damage, post-counter stability** and the target's incoming impact; **recoil is applied after the burst rolls**, so recoil never changes a burst probability on the same turn.
+3. **Randomness**: three MINSTD streams per match, derived from the match seed with a nonlinear mix (`mixed_seed`): stream 0 (shared) decides the collision; stream 1 + i decides player i's impact variance (0.9–1.1), the burst roll against player i and player i's ring-out roll. Swapping seats and swapping the two player streams must mirror the outcome exactly (AC-5).
+4. **Draw order inside a stream**: a collision draws one shared float; on a collision each player stream draws impact variance then the burst roll, in that order; ring-out rolls draw from the player stream only when that player's pressure exceeds the threshold and nobody has burst. No other draws exist.
+5. **Action selection in tests and tools** uses a separate stream (99): each turn, player 0 then player 1 pick uniformly from `legal_actions`. This is test tooling, not a game rule.
+
 ### States and Transitions
 
 Static per top: `AP, LI, MS, ST, MB, SM`, `type ∈ {Attack, Defense, Stamina, Balance}`, `domain` (identity bonus, nullable).

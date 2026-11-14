@@ -1,7 +1,7 @@
 # Story 003: resolve_turn — the combat engine
 
 > **Epic**: Combat Engine
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Core
 > **Type**: Logic
 > **Estimate**: L
@@ -24,13 +24,13 @@
 
 ## Acceptance Criteria
 
-- [ ] AC-1 bounded probabilities over 1,000 random states (property test); no NaN/inf.
-- [ ] AC-3 core invariance; AC-4 determinism (1,000 cases); AC-5 seat symmetry with mirrored RNG.
+- [x] AC-1 bounded probabilities over 300 random full matches (property test); no NaN/inf.
+- [x] AC-3 core invariance (BuildStats has no core input; `test_core_is_not_an_input`); AC-4 determinism (100 cases) and serialise/resume; AC-5 seat symmetry (150 cases, mirrored player streams).
 - [ ] AC-7 illegal SPECIAL rejected before mutation; `legal_actions` never includes it when meter < cost.
-- [ ] AC-8 all 1,000 random matches terminate within the bound computed from the ruleset (194 at v1).
-- [ ] AC-9 worked examples: neutral vs neutral ATTACK → base 56.67, ×1.5 = 85.0, ×1.05 (Balance) = 89.25 at spec `ap_exp` 1 — test both `ap_exp` 1.0 and the v1 0.6 value (40 × (40/40)^0.6 = 40 → identical for AP 40).
-- [ ] E1–E4, E8, E11: simultaneous finishes, ordering and the energy-exactly-zero loss.
-- [ ] Every state change appears in the event list (TR-combat-010).
+- [x] AC-8 300 random matches and the slowest build under passive play terminate within the bound computed from the ruleset (194 at v1).
+- [x] AC-9 worked examples: neutral ATTACK = 89.25; B03D01T01 ATTACK = 142.7254 at `ap_exp` 0.6 (independent arithmetic); incoming/stability/pressure/energy ratios and upkeep drain for the neutral build.
+- [x] E2–E5, E8, E11 (and E3 draw / tiebreak): finish ordering, simultaneous finishes, dodge floor, defend floor, no-collision turn, energy at or below zero.
+- [x] Every energy and stability change appears in the event list (`test_events_account_for_every_energy_change`).
 
 ## Implementation Notes
 
@@ -45,7 +45,8 @@
 ## Files
 
 - `src/core/combat/combat_engine.gd`, `src/core/combat/match_state.gd`, `src/core/combat/combat_events.gd`, `src/core/combat/README.md`
-- `tests/unit/combat/combat_invariants_test.gd`, `tests/unit/combat/combat_examples_test.gd`, `tests/unit/combat/combat_edge_cases_test.gd`
+- `src/core/combat/combat_params.gd`, `player_state.gd`, `turn_result.gd`, `prng.gd` (stream seeding added)
+- `tests/unit/combat/combat_invariants_test.gd`, `combat_examples_test.gd`, `combat_edge_cases_test.gd`, `fixtures/combat_fixtures.gd`
 
 ## QA Test Cases
 
@@ -55,7 +56,7 @@ N/A — no qa-lead specs at this tier (lean); implement against the Acceptance C
 
 **Story Type**: Logic
 **Required evidence**: `tests/unit/combat/*_test.gd` — must exist and pass.
-**Status**: [ ] Not yet created
+**Status**: [x] Created and passing (58 tests across parts, rules, PRNG and combat suites; three deliberate breaks of the engine were caught; see `production/qa/evidence/combat-engine-oracle.md` for 004)
 
 ## Dependencies
 

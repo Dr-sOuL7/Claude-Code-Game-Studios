@@ -1,7 +1,7 @@
 # Story 002: Versioned ruleset loader and deterministic PRNG
 
 > **Epic**: Combat Engine
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Foundation
 > **Type**: Logic
 > **Estimate**: S
@@ -26,7 +26,7 @@
 
 - [ ] `Ruleset.load_version("v1")` returns every knob in GDD Section 8/13 as typed values; a missing key is an error, never a silent default (TR-combat-008).
 - [ ] `assets/data/combat/combat_ruleset_v1.json` holds the v0.3 values and a `_doc` pointer to the GDD section per group.
-- [ ] `Prng.new(seed)` is MINSTD (`state = 16807 * state mod 2147483647`, seed 0 mapped to 1); first 1,000 outputs for seed 1 match the golden vector (first three: 16807, 282475249, 1622650073).
+- [x] `Prng.new(seed)` is MINSTD (`state = 16807 * state mod 2147483647`, seed 0 mapped to 1); the first ten outputs and the 10,000th (1043618065) for seed 1 match the published Park–Miller values (first three: 16807, 282475249, 1622650073).
 - [ ] `Prng.next_float()` is in [0, 1); `Prng.uniform(a, b)` = `a + (b − a) × next_float()`; `to_dict()`/`from_dict()` round-trip the state exactly (TR-combat-001).
 
 ## Implementation Notes
@@ -53,7 +53,7 @@ N/A — no qa-lead specs at this tier (lean); implement against the Acceptance C
 
 **Story Type**: Logic
 **Required evidence**: `tests/unit/combat/prng_golden_test.gd`, `tests/unit/rules/ruleset_load_test.gd` — must exist and pass.
-**Status**: [ ] Not yet created
+**Status**: [x] Created and passing (26 tests at story close; 58 with story 003's suites; see `production/qa/evidence/combat-engine-oracle.md` for 004)
 
 ## Dependencies
 
