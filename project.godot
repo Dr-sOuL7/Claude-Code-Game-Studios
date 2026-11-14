@@ -1,14 +1,22 @@
 ; Engine configuration file.
-; Written by /setup-engine. NOT VERIFIED against a Godot 4.7 binary (none was
-; available when this was created). run/main_scene is intentionally unset:
-; /dev-story or the developer sets it once a scene exists.
+; Written by /setup-engine; verified by headless import on Godot 4.7.2.
+; Main scene and display settings added for the first playable (portrait-first, responsive).
 
 config_version=5
 
 [application]
 
 config/name="SPINFORGE"
+run/main_scene="res://src/ui/app.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
 
 [rendering]
 
