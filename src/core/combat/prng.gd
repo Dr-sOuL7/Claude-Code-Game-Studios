@@ -46,6 +46,26 @@ func next_index(n: int) -> int:
 	return int(floor(next_float() * n))
 
 
+## A generator for one named stream of a match.
+##
+## MINSTD is linear in its seed, so raw seeds n and n+1 give streams that differ by a
+## constant at every step. Match seeds and the per-player streams are therefore passed
+## through a nonlinear (quadratic) mix first. Intermediates stay below 2^63:
+## x < 2^31 so x*x < 2^62 and x*48271 < 2^47.
+static func for_stream(seed: int, stream: int) -> Prng:
+	return Prng.new(mixed_seed(seed, stream))
+
+
+static func mixed_seed(seed: int, stream: int) -> int:
+	var x := seed % MODULUS
+	if x < 0:
+		x += MODULUS
+	x = (x + 1 + stream * 1000003) % MODULUS
+	for _round in range(4):
+		x = (x * x + x * 48271 + 11 + stream) % MODULUS
+	return x if x != 0 else 1
+
+
 func to_dict() -> Dictionary:
 	return {"state": state}
 
