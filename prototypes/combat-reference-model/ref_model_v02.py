@@ -26,6 +26,14 @@ K = dict(
     init_mult=1.08,         # initiative bonus vs DODGE/CHARGE (spec: 1.08)
     hit_meter_gain=0.0,     # special_meter gained by the target each time it is hit
     special_pierce=0.0,     # share of DEFEND mitigation ignored by SPECIAL
+    ap_exp=1.0,             # effective AP = 40*(AP/40)^ap_exp (1.0 = spec, linear)
+    mb_drain_div=80.0,      # passive drain = 1 + MB/mb_drain_div (spec: 80)
+    mb_evade=0.0,           # incoming *= 1 - mb_evade*(MB-15)/70 (speed makes clean hits harder)
+    mb_dodge=0.0,           # DODGE collision reduction += mb_dodge*(MB-15)/70
+    li_recoil=0.0,          # recoil *= 1 - li_recoil*(LI-20)/40  (LI 20..60 -> 0..li_recoil reduction)
+    li_stab=0.0,            # stability loss *= 1 - li_stab*(LI-20)/40
+    ap_cost=0.0,            # ATTACK/SPECIAL energy cost per turn = ap_cost*(AP-20)/40
+    mb_cap_bonus=0.0,       # collision cap raised by mb_cap_bonus*(MB-50)/35 for the dodging side? (unused)
     dodge_collision=0.25,   # collision-probability reduction from DODGE (spec: 0.25)
     dodge_decay=0.10,       # per-consecutive-use decay of DODGE (spec: 0.10)
     stamina_drain=0.8,      # Stamina-type drain multiplier (spec: 0.8)
@@ -108,7 +116,7 @@ def play(p0, p1, pol0, pol1, rng, max_turns=400, trace=None):
         for i in range(2):
             P += 0.005 * max(0, S[i]['p']['MB'] - 70)
             if acts[i] in AGGR: P += 0.15
-            if acts[i] == 'DOD': P -= K['dodge_collision'] * dodge_eff[i]
+            if acts[i] == 'DOD': P -= (K['dodge_collision'] + K['mb_dodge'] * (S[i]['p']['MB'] - 15) / 70.0) * dodge_eff[i]
         Pc = min(0.9, max(0.2, P))
         note('P_collision', Pc)
         collided = rng.random() < Pc
@@ -119,7 +127,7 @@ def play(p0, p1, pol0, pol1, rng, max_turns=400, trace=None):
             imp = [0.0, 0.0]
             for i in range(2):
                 me, p = S[i], S[i]['p']; op = S[1 - i]
-                base = p['AP'] * (1 + p['MB'] / 120.0)
+                base = 40.0 * (p['AP'] / 40.0) ** K['ap_exp'] * (1 + p['MB'] / 120.0)
                 m = {'ATK': 1.5, 'DEF': 1.0, 'DOD': 0.7, 'CHG': 0.5, 'SPC': 5.0}[acts[i]]
                 v = base * m
                 if p['type'] == 'A': v *= 1.15
@@ -152,8 +160,9 @@ def play(p0, p1, pol0, pol1, rng, max_turns=400, trace=None):
                 if acts[j] == 'CHG': inc *= 1.25
                 if tp['type'] == 'B': inc *= 0.95
                 inc *= 1 - 0.005 * max(0, tp['ST'] - 70)
+                inc *= 1 - K['mb_evade'] * (tp['MB'] - 15) / 70.0
                 est = tp['ST'] * stfac
-                tgt['stab'] = max(0.0, tgt['stab'] - inc / est)
+                tgt['stab'] = max(0.0, tgt['stab'] - (inc / est) * (1 - K['li_stab'] * (tp['LI'] - 20) / 40.0))
                 tgt['pos'] += (inc / (tp['MS'] + K['pressure_st_share'] * tp['ST'])) * K['pressure_scale'] + tgt['pp']
                 tgt['pp'] = 0.0
                 tgt['energy'] -= inc / K['energy_div']
@@ -174,6 +183,7 @@ def play(p0, p1, pol0, pol1, rng, max_turns=400, trace=None):
             for i in range(2):                        # recoil on the hitter
                 p = S[i]['p']
                 rec = imp[i] / (p['ST'] * stfac)
+                rec *= 1 - K['li_recoil'] * (p['LI'] - 20) / 40.0
                 if p['type'] == 'D': rec *= 0.85
                 if acts[i] in AGGR and S[i]['combo'] >= 2: rec *= 1 + 0.05 * min(3, S[i]['combo'] - 1)
                 S[i]['stab'] = max(0.0, S[i]['stab'] - rec)
@@ -184,7 +194,7 @@ def play(p0, p1, pol0, pol1, rng, max_turns=400, trace=None):
         # system effects
         for i in range(2):
             me, p = S[i], S[i]['p']
-            drain = 1 + p['MB'] / 80.0
+            drain = 1 + p['MB'] / K['mb_drain_div']
             if p['type'] == 'S': drain *= K['stamina_drain']
             if p['type'] == 'B': drain *= 0.95
             if p['domain'] == 'S': drain *= 0.92
@@ -192,7 +202,7 @@ def play(p0, p1, pol0, pol1, rng, max_turns=400, trace=None):
             drain *= K['drain_scale']
             me['energy'] -= drain
             if acts[i] in AGGR:
-                me['energy'] -= K['attack_cost']
+                me['energy'] -= K['attack_cost'] + K['ap_cost'] * (p['AP'] - 20) / 40.0
                 if not collided: me['energy'] -= K['whiff_cost']
             me['evade'] = (not collided) and acts[i] == 'DOD'
             if me['pos'] > 70: me['energy'] -= me['pos'] / 50.0

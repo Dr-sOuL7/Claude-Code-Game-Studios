@@ -85,3 +85,15 @@ Findings: see `design/gdd/combat-system.md` Section 12. In short, rules R1-R7 br
 action-level targets close in simulation; the component/build-level imbalance
 (B05, T03 weak; B03, B06 strong; builds from 0.02 to 0.86) is NOT fixed by any
 setting tried and needs a rule change (O8).
+
+## v0.3 component fix, O8 (added 2026-11-14)
+
+`o8_search.py` (LI / AP-cost levers), `o8_search2.py` (adds MB levers) and
+`o8_search3.py` (adds diminishing returns on AP, `ap_exp`) search on top of the v0.2
+rule set; `validate_v03.py` validates the chosen set on fresh seeds. Outputs:
+`o8_search*.out`, `results_v03.txt`. Each sweep takes 2-3 minutes on 4 cores.
+
+Finding: the blade gap is an AP-linearity problem. `ap_exp 0.6` plus an LI role in
+stability/recoil takes the blade spread from 0.26 to 0.09 and the count of builds
+below 25% win rate from 61 to 3. The tip spread stays at 0.22 (T03 0.37, T05 0.40):
+mobility and stamina are not yet symmetric. See `design/gdd/combat-system.md` §13.

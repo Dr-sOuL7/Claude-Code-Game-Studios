@@ -1,0 +1,30 @@
+v0.3 parameters: {'burst_ref_x': 106.0, 'energy_div': 120, 'pressure_st_share': 1.0, 'attack_cost': 0, 'special_pierce': 0, 'burst_ref_p': 0.003, 'pressure_scale': 3.0, 'energy_base': 30, 'drain_scale': 0.8, 'stamina_drain': 0.9, 'special_cost': 50, 'hit_meter_gain': 10, 'whiff_cost': 3, 'mb_drain_div': 160, 'mb_evade': 0.4, 'li_recoil': 0.5, 'li_stab': 0.7, 'ap_cost': 1, 'ap_exp': 0.6, 'defend_counter': 4, 'dodge_incoming': 0.65, 'evade_bonus': 0, 'init_mult': 1.0, 'dodge_collision': 0.25, 'dodge_decay': 0.1}
+seed 515 pen 0.20 | med 30 [p10 15 p90 47] burst 0.23 ring 0.21 spin 0.56 | pure ATK 0.40 DEF 0.48 DOD 0.37 CHG 0.40 | best-counter vs ATK 0.76 DEF 0.71 DOD 0.79 CHG 0.76 | types A0.51 B0.52 D0.46 S0.48
+seed 626 pen 0.20 | med 30 [p10 15 p90 48] burst 0.23 ring 0.21 spin 0.56 | pure ATK 0.41 DEF 0.45 DOD 0.37 CHG 0.41 | best-counter vs ATK 0.76 DEF 0.76 DOD 0.83 CHG 0.77 | types A0.51 B0.57 D0.50 S0.41
+seed 737 pen 0.20 | med 30 [p10 15 p90 47] burst 0.23 ring 0.21 spin 0.56 | pure ATK 0.41 DEF 0.48 DOD 0.38 CHG 0.41 | best-counter vs ATK 0.77 DEF 0.74 DOD 0.81 CHG 0.76 | types A0.54 B0.53 D0.50 S0.41
+seed 848 pen 0.10 | med 29 [p10 15 p90 46] burst 0.22 ring 0.20 spin 0.58 | pure ATK 0.39 DEF 0.48 DOD 0.40 CHG 0.40 | best-counter vs ATK 0.78 DEF 0.72 DOD 0.79 CHG 0.75 | types A0.50 B0.53 D0.51 S0.47
+
+512 profiles x 60 opponents: min 0.20 p05 0.32 p25 0.42 med 0.50 p75 0.58 p95 0.67 max 0.77 (noise ~ +/-0.065)
+  by blade: {'B01': 0.5, 'B02': 0.52, 'B03': 0.53, 'B04': 0.47, 'B05': 0.45, 'B06': 0.54, 'B07': 0.51, 'B08': 0.48}  spread 0.09
+  by disc: {'D01': 0.48, 'D02': 0.51, 'D03': 0.51, 'D04': 0.48, 'D05': 0.52, 'D06': 0.51, 'D07': 0.5, 'D08': 0.5}  spread 0.04
+  by tip: {'T01': 0.59, 'T02': 0.53, 'T03': 0.37, 'T04': 0.51, 'T05': 0.4, 'T06': 0.57, 'T07': 0.57, 'T08': 0.48}  spread 0.22
+  top [('B03D08T01', 0.77), ('B07D06T06', 0.76), ('B01D05T07', 0.75), ('B06D03T01', 0.72)] bottom [('B08D04T05', 0.2), ('B04D03T03', 0.22), ('B07D04T03', 0.22), ('B03D05T05', 0.25)]
+  profiles below 0.25: 3 / 512,  above 0.70: 5 / 512
+
+termination bound (slowest passive drain): 193.8 turns ('B01D01T05', 0.681, 132.0)
+invariants over 20000 matches: max turns 80 finishes {'spin': 10858, 'ringout': 4166, 'draw': 170, 'burst': 4369, 'tiebreak': 437}
+  P_burst_max      0.1668
+  P_burst_min      0.0001
+  P_collision_max  0.9000
+  P_collision_min  0.2000
+  P_ringout_max    0.7543
+  P_ringout_min    0.2377
+  energy_max       131.3190
+  energy_min       -7.4207
+  impact_max       758.7774
+  impact_min       13.3612
+  pos_max          173.5633
+  pos_min          0.0000
+  x_burst_max      6439.0498
+  x_burst_min      1.7990
+  NaN/inf: False | timeouts: 0
